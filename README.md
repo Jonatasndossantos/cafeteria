@@ -1,266 +1,173 @@
-## Git Submodules - Guia Completo
+# 🏛️ Cafeteria - Sistema de Gestão Municipal
 
-### O que são Git Submodules?
+Sistema web desenvolvido em Laravel 12 + React + TypeScript para gestão de processos administrativos municipais, incluindo contratos, licitações, planejamento e transparência pública.
 
-Git Submodules são uma forma de incluir um repositório Git dentro de outro repositório Git como um subdiretório. É como ter "repositórios dentro de repositórios". No nosso projeto, temos 5 submodules que representam diferentes "Espadas":
+## 🚀 Tecnologias
 
-```
-resources/js/App/Pages/Espadas/
-├── Espada1/Index/ (submodule)
-├── Espada2/Index/ (submodule)
-├── Espada3/Index/ (submodule)
-├── Espada4/Index/ (submodule)
-└── Espada5/Index/ (submodule)
-```
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: React 18 + TypeScript + TailwindCSS
+- **Build Tool**: Vite
+- **State Management**: TanStack Query
+- **UI Framework**: Radix UI + Headless UI
+- **Database**: MySQL/PostgreSQL
+- **AI Integration**: OpenAI API
 
-### Por que usar Submodules?
+## 📋 Pré-requisitos
 
-✅ **Vantagens:**
-- Manter código compartilhado em repositórios separados
-- Cada "Espada" pode ser desenvolvida independentemente
-- Controle de versão individual para cada componente
-- Facilita o trabalho em equipe
+- PHP 8.2 ou superior
+- Composer 2.0+
+- Node.js 18+ e npm
+- MySQL 8.0+ ou PostgreSQL 13+
+- Git
 
-❌ **Desvantagens:**
-- Mais complexo para iniciantes
-- Requer comandos específicos para sincronizar
+## 🛠️ Instalação
 
-### Como funciona o arquivo .gitmodules?
-
-O arquivo `.gitmodules` é como um "mapa" que diz ao Git onde estão os submodules:
-
-```ini
-[submodule "resources/js/App/Pages/Espadas/Espada1/Index"]
-    path = resources/js/App/Pages/Espadas/Espada1/Index
-    url = https://github.com/plataforma-lumen-arsenal/espada1-novo.git
-```
-
-- **path**: Onde o submodule fica no seu projeto
-- **url**: De onde baixar o código do submodule
-
-### Comandos Essenciais
-
-#### 1. Clonar um projeto com submodules
+### 1. Clone o repositório
 ```bash
-# Clona o projeto principal E todos os submodules
-git clone --recursive https://github.com/seu-usuario/seu-projeto.git
-
-# OU se já clonou sem os submodules:
-git clone https://github.com/seu-usuario/seu-projeto.git
-cd seu-projeto
-git submodule update --init --recursive
+git clone <url-do-repositorio>
+cd cafeteria
 ```
 
-#### 2. Adicionar um novo submodule
+### 2. Instale as dependências PHP
 ```bash
-# Exemplo: adicionando Espada6
-git submodule add https://github.com/plataforma-lumen-arsenal/espada6-novo.git resources/js/App/Pages/Espadas/Espada6/Index
-git commit -m "Adiciona submodule Espada6"
+composer install
 ```
 
-#### 3. Atualizar submodules
+### 3. Configure o ambiente
 ```bash
-# Atualiza TODOS os submodules para a versão mais recente
-git submodule update --remote
-
-# Atualiza apenas um submodule específico
-git submodule update --remote resources/js/App/Pages/Espadas/Espada1/Index
+cp .env.example .env
+php artisan key:generate
 ```
 
-#### 4. Verificar status dos submodules
+### 4. Configure o banco de dados
+Edite o arquivo `.env` e configure as credenciais do banco:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cafeteria
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+
+### 5. Execute as migrações e seeders
 ```bash
-# Mostra o status de todos os submodules
-git submodule status
-
-# Mostra se há mudanças nos submodules
-git status
+php artisan migrate
+php artisan db:seed
 ```
 
-#### 5. Entrar em um submodule para fazer mudanças
+### 6. Instale as dependências JavaScript
 ```bash
-# Navega para o submodule
-cd resources/js/App/Pages/Espadas/Espada1/Index
-
-# Agora você está DENTRO do repositório do submodule
-# Pode fazer commits normalmente
-git add .
-git commit -m "Minha mudança na Espada1"
-git push origin main
-
-# Volta para o projeto principal
-cd ../../../../../../../../
+npm install
 ```
 
-#### 6. Remover um submodule
+### 7. Configure o Vite (opcional)
 ```bash
-# 1. Remove a entrada do .gitmodules
-git config --remove-section submodule.resources/js/App/Pages/Espadas/Espada1/Index
-
-# 2. Remove a pasta
-git rm --cached resources/js/App/Pages/Espadas/Espada1/Index
-rm -rf resources/js/App/Pages/Espadas/Espada1/Index
-
-# 3. Commit das mudanças
-git commit -m "Remove submodule Espada1"
+npm run build
 ```
 
-### Fluxo de Trabalho Típico
-
-#### Para Desenvolvedores:
-
-1. **Primeira vez clonando o projeto:**
+### 8. Inicie o servidor de desenvolvimento
 ```bash
-git clone --recursive https://github.com/plataforma-lumen-arsenal/lumen.git
-cd lumen
+# Terminal 1 - Servidor Laravel
+php artisan serve
+
+# Terminal 2 - Vite (desenvolvimento)
+npm run dev
+
+# Ou use o comando combinado
+composer run dev
 ```
 
-2. **Atualizando o projeto (incluindo submodules):**
-```bash
-git pull origin main
-git submodule update --init --recursive
+## 🏗️ Estrutura do Projeto
+
+```
+cafeteria/
+├── app/
+│   ├── Http/Controllers/     # Controllers Laravel
+│   ├── Models/              # Modelos Eloquent
+│   ├── Services/            # Serviços de negócio
+│   └── Traits/              # Traits compartilhados
+├── resources/js/App/
+│   ├── Components/          # Componentes React
+│   ├── Pages/              # Páginas da aplicação
+│   ├── hooks/              # Custom hooks
+│   └── contexts/           # Contextos React
+├── database/
+│   ├── migrations/         # Migrações do banco
+│   └── seeders/           # Seeders
+└── docs/                  # Documentação técnica
 ```
 
-3. **Trabalhando em uma Espada específica:**
-```bash
-# Vai para o submodule da Espada2
-cd resources/js/App/Pages/Espadas/Espada2/Index
+## 🎯 Funcionalidades Principais
 
-# Faz suas mudanças
-# ... edita arquivos ...
 
-# Commit no submodule
-git add .
-git commit -m "Melhoria na Espada2"
-git push origin main
+### 🤖 Integração com IA
+- Sugestões automáticas para documentos
+- Análise de riscos em contratos
+- Geração de conteúdo inteligente
+- Classificação automática de documentos
 
-# Volta para o projeto principal
-cd ../../../../../../../../
+### 📊 Dashboards
+- Painel do Prefeito
+- Indicadores financeiros
+- Gestão de usuários
+- Relatórios gerenciais
 
-# Atualiza a referência do submodule no projeto principal
-git add resources/js/App/Pages/Espadas/Espada2/Index
-git commit -m "Atualiza Espada2 para nova versão"
-git push origin main
-```
-
-### Dicas Importantes para Iniciantes
-
-🔔 **Lembre-se sempre:**
-- Submodules apontam para commits específicos, não para branches
-- Quando alguém atualiza um submodule, outros devem rodar `git submodule update`
-- Sempre use `git clone --recursive` ao clonar projetos com submodules
-
-🚨 **Cuidados:**
-- Não delete as pastas dos submodules manualmente
-- Sempre commit primeiro no submodule, depois no projeto principal
-- Use `git submodule update --init --recursive` após fazer pull
-
-### Comandos Úteis para Diagnóstico
+## 🔧 Comandos Úteis
 
 ```bash
-# Ver quais submodules estão configurados
-git submodule
+# Desenvolvimento
+composer run dev          # Inicia todos os serviços
+php artisan serve         # Servidor Laravel
+npm run dev              # Vite dev server
 
-# Ver URLs dos submodules
-cat .gitmodules
+# Banco de dados
+php artisan migrate       # Executa migrações
+php artisan migrate:fresh # Recria banco
+php artisan db:seed      # Executa seeders
 
-# Ver status detalhado
-git submodule status --recursive
+# Cache e otimização
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+php artisan optimize
 
-# Sincronizar URLs (se mudaram no .gitmodules)
-git submodule sync --recursive
+# Testes
+php artisan test         # Executa testes
+npm run test            # Testes JavaScript
 ```
 
-### Exemplo Prático com o Nosso Projeto
+## 🌐 Acesso
 
-Se você quer trabalhar na Espada3:
+Após a instalação, acesse:
+- **URL**: http://localhost:8000
+- **Login padrão**: Verifique os seeders para credenciais
 
-```bash
-# 1. Clone o projeto (primeira vez)
-git clone --recursive https://github.com/plataforma-lumen-arsenal/lumen.git
+## 📚 Documentação
 
-# 2. Entre na Espada3
-cd resources/js/App/Pages/Espadas/Espada3/Index
+- [Fluxo de Dados](docs/ELOQUENT_INERTIA_REACT_TANSTACK_FLOW.md)
+- [Integração com IA](docs/AI_SUGGESTIONS_IMPLEMENTATION.md)
+- [Padrões de Desenvolvimento](docs/INTEGRATION_BEST_PRACTICES.md)
 
-# 3. Verifique em que branch está
-git branch
+## 🤝 Contribuição
 
-# 4. Faça suas mudanças
-# ... edita arquivos ...
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-# 5. Commit na Espada3
-git add .
-git commit -m "Nova funcionalidade na Espada3"
-git push origin main
+## 📄 Licença
 
-# 6. Volte para o projeto principal
-cd ../../../../../../../../
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-# 7. Atualize a referência no projeto principal
-git add .
-git commit -m "Atualiza Espada3"
-git push origin main
-```
+## 🆘 Suporte
 
-Agora você está pronto para trabalhar com Git Submodules! 🚀
+Para dúvidas ou problemas:
+- Abra uma [issue](../../issues)
+- Consulte a [documentação](docs/)
+- Entre em contato com a equipe de desenvolvimento
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+---
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Desenvolvido com ❤️ para a gestão pública eficiente**
