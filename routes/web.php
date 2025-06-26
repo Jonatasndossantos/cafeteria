@@ -29,10 +29,6 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
 {
     Route::get('/ambienteservidor', [ProcessoController::class, 'ambienteServidor'])->name('ambienteServidor');
 
-    Route::get('/perfil', function () {
-        return Inertia::render('Perfil/Perfil');
-    })->name('perfil');
-
     Route::get('/painel/prefeito', function () {
         return Inertia::render('Paineis/Prefeito/Create', [
             'auth' => [

@@ -91,7 +91,7 @@ class ProcessoController extends Controller
                 'auth' => [
                     'user' => auth()->user()
                 ],
-                'setor' => Setor::all()
+                'setores' => Setor::all()
             ]);
         } catch (\Exception $e) {
             \Log::error('ProcessoController@index - Erro:', ['error' => $e->getMessage()]);

@@ -92,9 +92,7 @@ return (
                 </button>
               </Dropdown.Trigger>
               <Dropdown.Content align="right" width="48">
-                <Dropdown.Link href={route('perfil')}>Perfil</Dropdown.Link>
-
-
+                <Dropdown.Link href={route('profile.edit')}>Perfil</Dropdown.Link>
                   <Dropdown.Link
                     href={route('logout')}
                     method="post"
