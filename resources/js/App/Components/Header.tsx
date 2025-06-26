@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
 import { usePage } from '@inertiajs/react';
 import { useQuery } from '@tanstack/react-query';
-import logoRifaina from "@/Components/brasaopref/logorifaina.png"
+import logoEspresso from "@/Components/brasaopref/espresso-damore.png"
 
 interface Usuario {
   nome: string;
@@ -59,29 +59,29 @@ export const Header = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-[#F5F5F5] to-[#0A3D62] text-white">
+    <header className="bg-gradient-to-r from-[#CDA77A] to-[#4E1F14] text-white">
       <div className="px-20 mx-auto">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center gap-x-6">
             <Link href="/dashboard" className="shrink-0">
               <img
-                src={logoRifaina}
-                alt="Logo da Prefeitura de Rifaina"
-                className="block w-auto h-12"
-                aria-label="Logo da Prefeitura de Rifaina"
+                src={logoEspresso}
+                alt="Logo Espresso D'Amore"
+                className="block w-20 h-20 rounded-full object-cover"
+                aria-label="Logo Espresso D'Amore"
               />
             </Link>
           </div>
 
           <div className="flex items-center gap-x-4">
             <button
-              className="relative p-2 rounded-full hover:bg-[#0c4b7a] transition-colors"
+              className="relative p-2 rounded-full hover:bg-[#4E1F14] transition-colors"
               aria-label="Notificações"
               tabIndex={0}
             >
               <Bell className="w-6 h-6" />
               {notificacoes.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#D4AF37] text-[#0A3D62] text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#CDA77A] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {notificacoes.length > 9 ? '9+' : notificacoes.length}
                 </span>
               )}
@@ -89,12 +89,12 @@ export const Header = () => {
 
             <Dropdown>
               <Dropdown.Trigger>
-                <button className="flex items-center gap-x-2 text-right hover:bg-[#0c4b7a] p-2 rounded transition-colors cursor-pointer">
+                <button className="flex items-center gap-x-2 text-right hover:bg-[#4E1F14] p-2 rounded transition-colors cursor-pointer">
                   <div>
-                    <div className="font-medium hover:text-[#D4AF37] transition-colors">{usuario?.nome}</div>
+                    <div className="font-medium hover:text-[#CDA77A] transition-colors">{usuario?.nome}</div>
                     <div className="text-xs opacity-80">{usuario?.setor?.nome} | {usuario?.cargo}</div>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-[#D4AF37] text-[#0A3D62] font-bold flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-[#CDA77A] text-white font-bold flex items-center justify-center">
                     {obterIniciais(usuario?.nome)}
                   </div>
                 </button>
