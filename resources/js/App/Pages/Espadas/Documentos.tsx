@@ -4,7 +4,7 @@ import { VisualizacaoTabela } from '@/Components/portalTransparencia/Visualizaca
 import { Button } from '@/Components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { VisualizacaoTipo } from '@/types/portalTransparencia';
-import { Table } from 'lucide-react';
+import { Table, Plus } from 'lucide-react';
 // @ts-ignore
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
 import { useQuery } from '@tanstack/react-query';
@@ -78,20 +78,18 @@ const Documentos = ({ processos = [] }: Props) => {
           {/* Header Section */}
           <div className="mb-8">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold">Portal da Transparência</h1>
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-500">
-                  {totalFiltrados} de {totalDocumentos} documento{totalDocumentos !== 1 ? 's' : ''} encontrado{totalFiltrados !== 1 ? 's' : ''}
-                </span>
-                <Tabs value={visualizacao} onValueChange={(value) => setVisualizacao(value as VisualizacaoTipo)}>
-                  <TabsList>
-                    <TabsTrigger value="Tabela" className="flex items-center gap-2">
-                      <Table className="w-4 h-4" />
-                      <span className="hidden sm:inline">Tabela</span>
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
+            
+              <span className="text-sm text-gray-500">
+                {totalFiltrados} de {totalDocumentos} documento{totalDocumentos !== 1 ? 's' : ''} encontrado{totalFiltrados !== 1 ? 's' : ''}
+              </span>
+              <Tabs value={visualizacao} onValueChange={(value) => setVisualizacao(value as VisualizacaoTipo)}>
+                <TabsList>
+                  <TabsTrigger value="Tabela" className="flex items-center gap-2">
+                    <Table className="w-4 h-4" />
+                    <span className="hidden sm:inline">Tabela</span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
           </div>
 
@@ -114,6 +112,17 @@ const Documentos = ({ processos = [] }: Props) => {
               </TabsContent>
             </Tabs>
           </div>
+
+          {/* Botão flutuante Novo Processo */}
+          <Button
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#4E1F14] text-white hover:bg-[#4E1F14]/90 shadow-lg rounded-full px-6 py-4 text-base"
+            style={{ minWidth: 0 }}
+            onClick={() => window.location.href = '/processos/create'}
+            aria-label="Novo Processo"
+          >
+            <Plus className="w-5 h-5" />
+            <span className="hidden sm:inline">Nova Solicitação</span>
+          </Button>
         </main>
       </div>
     </AuthenticatedLayout>
