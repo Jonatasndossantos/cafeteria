@@ -1,0 +1,422 @@
+#testemunhas {
+  width: 100%;
+}
+
+.tituloTestemunhas {
+  margin-top: 150px;
+  font-size: 45px;
+  text-align: center;
+}
+
+#containerTestemunhas {
+  margin-top: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.cardtestemunhas {
+  width: 380px;
+  min-height: 310px;
+  color: #ffffff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 0 10px rgba(232, 177, 9, 0.06);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.perfil img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #4480C4;
+  object-fit: cover;
+}
+
+.nome {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.estrela {
+  color: #4480C4;
+  margin-left: 4px;
+}
+
+.cargo {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.depoimento {
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.depoimento .aspas {
+  color: #4480C4;
+  font-size: 1.4rem;
+}
+
+.btnContainer {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btnTestemunhas a,
+.btnTestemunhas a:visited,
+.btnTestemunhas a:hover,
+.btnTestemunhas a:focus,
+.btnTestemunhas a:active {
+  text-decoration: none;
+  color: #fff;/
+}
+
+.btnTestemunhas {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: 1px solid #4480C4;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 8px rgba(23, 129, 222, 0.4);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  display: flex;
+  justify-content: center;  
+  align-items: center;     
+  text-align: center;
+  text-decoration: none;
+}
+
+
+.btnTestemunhas:hover {
+  background-color: #57595c71; 
+  transform: scale(1.03);
+}
+
+@media screen and (min-width: 321px) and (max-width: 376px) {
+  .tituloTestemunhas {
+    font-size: 26px;
+    margin-top: 100px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: -30px;
+  }
+
+  #containerTestemunhas {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .cardtestemunhas {
+    width: 70%;
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  .btnTestemunhas {
+    width: 80%;
+    padding: 15px 20px;
+  }
+
+  .btnTestemunhas {
+    width: 54%;
+  }
+}
+
+@media screen and (min-width: 377px) and (max-width: 480px) {
+  .tituloTestemunhas {
+    font-size: 29px;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  #containerTestemunhas {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .cardtestemunhas {
+    width: 70%;
+    height: auto;
+  }
+
+  .btnTestemunhas {
+    width: 40%;
+  }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .tituloTestemunhas {
+    font-size: 42px;
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  #containerTestemunhas {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .cardtestemunhas {
+    width: 80%;
+    height: auto;
+  }
+
+  .btnTestemunhas {
+    width: 250px;
+  }
+
+  .estrela {
+    font-size: 1.6rem;
+  }
+
+   .nome {
+    font-size: 1.3rem;
+  }
+
+   .cargo {
+    color: #aaa;
+    font-size: 1.3rem;
+  }
+
+  .depoimento {
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .depoimento .aspas {
+    font-size: 1.8rem;
+  }
+
+  .btnTestemunhas {
+      margin: 2rem auto;
+      padding: 1.2rem 2.8rem;
+      font-size: 1.2rem;
+  }
+}
+
+ @media screen and (min-width: 992px) and (max-width: 1000px) {
+    .tituloTestemunhas {
+    font-size: 42px;
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  #containerTestemunhas {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .cardtestemunhas {
+    width: 80%;
+    height: auto;
+  }
+
+  .btnTestemunhas {
+    width: 250px;
+  }
+
+  .estrela {
+    font-size: 1.6rem;
+  }
+
+   .nome {
+    font-size: 1.3rem;
+  }
+
+   .cargo {
+    color: #aaa;
+    font-size: 1.3rem;
+  }
+
+  .depoimento {
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  .depoimento .aspas {
+    font-size: 1.8rem;
+  }
+
+  .btnTestemunhas {
+      margin: 2rem auto;
+      padding: 1.2rem 2.8rem;
+      font-size: 1.2rem;
+  }
+ }
+
+
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .tituloTestemunhas {
+    font-size: 40px;
+  }
+
+  #containerTestemunhas {
+    flex-direction: row;
+    gap: 60px;
+  }
+
+  .cardtestemunhas {
+    width: 360px;
+    height: 340px;
+  }
+
+  .btnTestemunhas {
+    width: 200px;
+    font-size: 18px;
+  }
+
+  .estrela {
+    font-size: 1.5rem;
+  }
+
+   .nome {
+    font-size: 1.2rem;
+  }
+
+   .cargo {
+    color: #aaa;
+    font-size: 1.2rem;
+  }
+
+  .depoimento {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+
+  .depoimento .aspas {
+    font-size: 1.8rem;
+  }
+
+
+  
+}
+
+
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+  .tituloTestemunhas {
+    font-size: 50px;
+  }
+
+  .cardtestemunhas {
+    width: 400px;
+  }
+
+  .nome {
+    font-size: 1.3rem;
+  }
+
+  .estrela {
+    font-size: 1.6rem;
+  }
+
+  .btnTestemunhas {
+     margin-top: 50px;
+    padding: 1.3rem 4rem;
+    font-size: 1.3rem;
+  }
+
+  .estrela {
+    font-size: 1.6rem;
+  }
+
+   .nome {
+    font-size: 1.3rem;
+  }
+
+   .cargo {
+    color: #aaa;
+    font-size: 1.3rem;
+  }
+
+  .depoimento {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+
+  .depoimento .aspas {
+    font-size: 1.8rem;
+  }
+
+
+}
+
+
+@media screen and (min-width: 1920px) {
+  .tituloTestemunhas {
+    font-size: 3.5rem;
+  }
+
+  .cardtestemunhas {
+    width: 420px;
+   height: 380px;
+  }
+
+   .estrela {
+    font-size: 1.6rem;
+  }
+
+   .nome {
+    font-size: 1.4rem;
+  }
+
+
+  .cargo {
+    color: #aaa;
+    font-size: 1.4rem;
+  }
+
+  .depoimento {
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+
+  .depoimento .aspas {
+    font-size: 1.8rem;
+  }
+
+  .btnTestemunhas {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.4rem;
+  }
+}

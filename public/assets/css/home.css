@@ -1,0 +1,146 @@
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: transparent;
+  z-index: 12;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.hero h1 .highlight {
+  color: #E8B109;
+}
+
+.hero .subtext {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+/* === 321px até 376px === */
+@media screen and (min-width: 321px) and (max-width: 376px) {
+  .hero {
+    padding: 8rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    max-width: 300px;
+  }
+
+  .hero .subtext {
+    font-size: 1.2rem;
+    max-width: 300px;
+  }
+}
+
+/* === 377px até 480px === */
+@media screen and (min-width: 377px) and (max-width: 480px) {
+  .hero {
+    padding: 10rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.7rem;
+  }
+
+  .hero .subtext {
+    font-size: 1.3rem;
+  }
+}
+
+/* === 768px até 991px (tablet) === */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+  .hero {
+    padding: 7rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    max-width: 500px;
+  }
+
+  .hero .subtext {
+    font-size: 1.5rem;
+    max-width: 500px;
+  }
+}
+
+ @media screen and (min-width: 992px) and (max-width: 1000px) {
+  .hero {
+    padding: 7rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    max-width: 500px;
+  }
+
+  .hero .subtext {
+    font-size: 1.5rem;
+    max-width: 500px;
+  }
+ }
+
+/* === 1200px até 1599px === */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+
+  .hero {
+    padding: 8rem 1.5rem;
+  }
+
+
+  .hero h1 {
+    font-size: 3.4rem;
+    max-width: 700px;
+  }
+
+  .hero .subtext {
+    font-size: 1.4rem;
+    max-width: 700px;
+  }
+}
+
+/* === 1600px até 1919px === */
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+  .hero h1 {
+    font-size: 4rem;
+    max-width: 900px;
+  }
+
+  .hero .subtext {
+    font-size: 1.5rem;
+    max-width: 600px;
+  }
+}
+
+/* === min-width 1920px === */
+@media screen and (min-width: 1920px) {
+  .hero {
+    padding: 7rem 3rem;
+  }
+
+  .hero h1 {
+    font-size: 4.4rem;
+    max-width: 900px;
+  }
+
+  .hero .subtext {
+    font-size: 1.6rem;
+    max-width: 700px;
+  }
+}
+
+

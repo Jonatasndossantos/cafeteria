@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["resources/js/App/*"],
+      "@Components/*": ["resources/js/App/Components/*"],
+      "@hooks/*": ["resources/js/App/hooks/*"],
+      "@lib/*": ["resources/js/App/lib/*"],
+      "@utils/*": ["resources/js/App/utils/*"],
+      "@styles/*": ["resources/js/App/styles/*"]
+    }
+  },
+  "include": [
+    "resources/js/**/*.ts",
+    "resources/js/**/*.tsx",
+    "resources/js/App/**/*.ts",
+    "resources/js/App/**/*.tsx",
+    "resources/js/App/Pages/DFD/espada1-novo/src/**/*.ts",
+    "resources/js/App/Pages/DFD/espada1-novo/src/**/*.tsx"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

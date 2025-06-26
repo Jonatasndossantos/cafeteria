@@ -1,0 +1,353 @@
+#tituloPlanos {
+  font-size: 40px;
+  margin-top: 220px;
+  text-align: center;
+}
+
+#containerPlanos {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.cardPlanos {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 5.5rem;
+  width: 320px;
+  padding: 2.5rem 2rem 3.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  color: #ffffff;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  position: relative;
+  overflow: visible; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 1px solid rgba(245, 221, 14, 0.12);
+  border-top: 1px solid rgba(225, 186, 12, 0.08);
+}
+
+
+
+.titulo-premium {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+
+.lista-premium {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  color: #d8d8d8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 300;
+  letter-spacing: 0.2px;
+}
+
+
+.lista-premium li + li {
+  margin-top: 0.7rem;
+}
+
+.btn-premium {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.9rem 0;
+  background: #E8B109;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 25px rgba(248, 222, 71, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(205, 181, 59, 0.6);
+}
+
+.lista-premium li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: #E8B109; 
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.lista-premium li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.icon-box-planos {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 55px;
+  background-color: #E8B109; 
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.icon-box-planos p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+
+@media screen and (min-width: 321px) and (max-width: 376px)  {
+    #tituloPlanos {
+      font-size: 26px;
+      margin-top: 100px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      margin-bottom: -100px;
+    }
+
+    .cardPlanos {
+      margin-top: 30px;
+      width: 280px;
+      height: auto;
+    }
+}
+
+@media screen and (min-width: 377px) and (max-width: 480px) {
+  #tituloPlanos {
+    font-size: 29px;
+    margin-top: 130px;
+    margin-bottom: -80px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .cardPlanos {
+    margin-top: 40px;
+    width: 280px;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+  #tituloPlanos {
+    font-size: 42px;
+    margin-top: 130px;
+    margin-bottom: -40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .cardPlanos {
+    margin-top: 50px;
+    max-width: 420px;
+    padding: 2.5rem 2rem 3rem;
+    height: auto;
+  }
+
+  .titulo-premium  {
+    font-size: 1.5rem;
+  }
+
+  .lista-premium {
+    font-size: 1.3rem;
+  }
+
+
+  #lumenIndividualBtn {
+    margin-top: 70px;
+  }
+
+  #lumenGovernancaBtn {
+    margin-top: 140px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1000px){
+   #tituloPlanos {
+    font-size: 42px;
+    margin-top: 130px;
+    margin-bottom: -40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .cardPlanos {
+    max-width: 420px;
+    padding: 2.5rem 2rem 3rem;
+    height: auto;
+  }
+
+  .titulo-premium  {
+    font-size: 1.5rem;
+  }
+
+  .lista-premium {
+    font-size: 1.3rem;
+  }
+
+
+  #lumenIndividualBtn {
+    margin-top: 70px;
+  }
+
+  #containerPlanos {
+    gap: 80px
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+#containerPlanos {
+  max-width: 1400px;      
+  margin: 180px auto;         
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;              
+  padding: 40px 20px;     
+}
+
+.cardPlanos { 
+  max-width: 290px;
+  padding: 2.5rem 2rem 3rem;
+  height: auto;               
+}
+
+.titulo-premium {
+  font-size: 1.3rem;
+}
+
+.lista-premium {
+  font-size: 1.2rem;
+}
+
+#lumenIndividualBtn {
+  margin-top: 130px;
+}
+
+ #lumenGovernancaBtn {
+  margin-top: 130px;
+}
+
+#lumenConsultorBtn {
+  margin-top: 70px;
+}
+
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+#tituloPlanos {
+  font-size: 50px
+}
+#containerPlanos {
+  max-width: 1600px;      
+  margin: 180px auto;         
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;              
+  padding: 40px 20px;     
+}
+
+.cardPlanos { 
+  max-width: 320px;
+  padding: 2.5rem 2rem 3rem;
+  height: auto;               
+}
+
+.titulo-premium {
+  font-size: 1.3rem;
+}
+
+.lista-premium {
+  font-size: 1.2rem;
+}
+
+#lumenIndividualBtn {
+  margin-top: 130px;
+}
+
+ #lumenGovernancaBtn {
+  margin-top: 130px;
+}
+
+#lumenConsultorBtn {
+  margin-top: 70px;
+}
+
+
+}
+
+ @media screen and (min-width: 1920px) {
+    .cardPlanos {
+      height: auto;
+    }
+
+    #tituloPlanos {
+      font-size: 3.5rem;
+    }
+
+    .lista-premium {
+      font-size: 1.4rem;
+    }
+
+    .titulo-premium {
+      font-size: 1.4rem;
+    }
+
+    #containerPlanos {
+      gap: 60px;
+    }
+
+    #lumenIndividualBtn {
+      margin-top: 130px;
+    }
+
+    #lumenConsultorBtn {
+      margin-top: 90px;
+    }
+    
+    #lumenGovernancaBtn {
+      margin-top: 150px;
+    }
+
+    .icon-box-planos {
+      width: 55px;
+      height: 55px;
+    }
+ }

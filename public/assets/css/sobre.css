@@ -1,0 +1,356 @@
+#cardsSobre {
+    margin-top: -140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.cardLinha {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; 
+}
+
+.cardInfo-menor {
+    width: 430px;
+    height: 280px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardInfo-menor,
+.cardInfo-maior {
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(232, 177, 9, 0.06);
+}
+
+.cardicon {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.icon-eye {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.icon-eye::before {
+  content: "";
+  position: absolute;
+  top: 0;  
+  left: 20px;
+  width: 65px; 
+  height: 2px; 
+  background-color: #4480C4; 
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.cardicon h3 {
+  padding-top: 10px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.cardicon p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+
+.cardInfo-maior {
+    width: 890px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.cardicon p strong {
+  color: #3fa6f0;
+  font-weight: 500;
+}
+
+
+/* RESPONSIVIDADE*/
+@media screen and (max-width: 376px) {
+    .cardInfo-menor,
+    .cardInfo-maior {
+        width: 80vw; 
+        height: auto;
+        padding: 2.2rem;
+        font-size: 0.95rem;
+    }
+
+    #cardsSobre {
+        margin-top: -90px; 
+        gap: 50px; 
+    }
+
+    .cardLinha {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+}
+
+
+@media screen and (min-width: 377px) and (max-width: 480px) {
+    .cardInfo-menor,
+    .cardInfo-maior {
+        width: 80vw; 
+        height: auto;
+        padding: 2.5rem;
+    }
+
+    .cardInfo-maior {
+        padding: 2rem;
+    }
+
+
+    .cardInfo-menor p,
+    .cardInfo-maior p {
+        font-size: 1.1rem;
+    } 
+
+    #cardsSobre {
+        margin-top: -100px; 
+        gap: 50px; 
+    }
+
+    .cardLinha {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .cardInfo-menor,
+    .cardInfo-maior {
+        width: 85%; 
+        height: auto;
+        padding: 3rem 3rem;
+        font-size: 1.4rem;
+    }
+
+    .cardInfo-menor p,
+    .cardInfo-maior p{
+        font-size: 1.4rem;
+    } 
+
+    .cardInfo-menor h3,
+    .cardInfo-maior h3{
+        font-size: 1.4rem;
+    } 
+
+    #cardsSobre {
+        margin-top: -280px;
+        gap: 50px;
+    }
+
+    .cardLinha {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .icon-eye::before {
+        content: "";
+        position: absolute;
+        top: 0;  
+        left: 30px;
+        width: 75px; 
+        height: 3px; 
+        background-color: #4480C4; 
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+}
+
+ @media screen and (min-width: 992px) and (max-width: 1000px) {
+     .cardInfo-menor,
+    .cardInfo-maior {
+        width: 85%; 
+        height: auto;
+        padding: 3rem 3rem;
+        font-size: 1.4rem;
+    }
+
+    .cardInfo-menor p,
+    .cardInfo-maior p{
+        font-size: 1.4rem;
+    } 
+
+    .cardInfo-menor h3,
+    .cardInfo-maior h3{
+        font-size: 1.4rem;
+    } 
+
+    #cardsSobre {
+        margin-top: -280px;
+        gap: 50px;
+    }
+
+    .cardLinha {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .icon-eye::before {
+        content: "";
+        position: absolute;
+        top: 0;  
+        left: 30px;
+        width: 75px; 
+        height: 3px; 
+        background-color: #4480C4; 
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+ }
+
+
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+    #cardsSobre {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    .cardLinha {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap; 
+    }
+    
+    .cardInfo-menor {
+        padding: 2.5rem;
+        width: 400px;
+        height: 370px;
+    }
+    
+    .cardInfo-maior {
+        width: 840px;
+        height: 370px;
+    }
+
+    .cardInfo-menor p,
+    .cardInfo-maior p{
+        font-size: 1.2rem;
+    } 
+
+    .cardInfo-menor h3,
+    .cardInfo-maior h3{
+        font-size: 1.3rem;
+    } 
+
+    .icon-eye::before {
+        content: "";
+        position: absolute;
+        top: 0;  
+        left: 25px;
+        width: 50px; 
+        height: 3px; 
+        background-color: #4480C4; 
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+  }
+  
+
+@media screen and (min-width: 1600px) and (max-width: 1919px){
+#cardsSobre {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.cardLinha {
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    flex-wrap: wrap;
+}
+
+.cardInfo-menor {
+    font-size: 1.2rem;
+    width: 500px;  
+    height: 340px;
+}
+
+.cardInfo-menor p, .cardInfo-maior p {
+    font-size: 1.2rem;
+}
+
+.cardInfo-maior {
+    font-size: 1.4rem;
+    width: 1020px;  
+    height: 340px;
+}
+}
+
+@media screen and (min-width: 1920px) {
+  #cardsSobre {
+    margin-top: -140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .cardLinha {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+
+  .cardInfo-menor {
+    width: 460px;    /* Aumenta proporcionalmente */
+    height: 390px;
+  }
+
+  .cardInfo-maior {
+    width: 990px;   /* Maior para preencher bem a linha */
+    height: 390px;
+  }
+
+  .cardInfo-menor p,
+  .cardInfo-maior p{
+      font-size: 1.4rem;
+  } 
+
+  .cardInfo-menor h3,
+  .cardInfo-maior h3{
+      font-size: 1.4rem;
+  } 
+}
