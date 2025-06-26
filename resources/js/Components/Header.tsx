@@ -50,7 +50,7 @@ export const Header = () => {
   };
 //   console.log(usuario);
 
-  return (
+return (
     <header className="bg-gradient-to-r from-[#CDA77A] to-[#4E1F14] text-white">
       <div className="px-20 mx-auto">
         <div className="flex justify-between items-center py-4">
@@ -93,13 +93,7 @@ export const Header = () => {
               </Dropdown.Trigger>
               <Dropdown.Content align="right" width="48">
                 <Dropdown.Link href={route('perfil')}>Perfil</Dropdown.Link>
-                <Dropdown.Link href={route('ambienteServidor')}>Ambiente de Servidor</Dropdown.Link>
-                {usuario?.perfilAcesso === 'admin' && (
-                  <>
-                    <Dropdown.Link href={route('gestao-usuarios.index')}>Gestão de Usuários</Dropdown.Link>
-                    <Dropdown.Link href={route('setores.index')}>Gestão de Setores</Dropdown.Link>
-                  </>
-                )}
+
 
                   <Dropdown.Link
                     href={route('logout')}

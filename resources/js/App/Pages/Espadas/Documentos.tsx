@@ -3,8 +3,10 @@ import { FiltrosAvancados } from '@/Components/portalTransparencia/FiltrosAvanca
 import { VisualizacaoTabela } from '@/Components/portalTransparencia/VisualizacaoTabela';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { VisualizacaoTipo } from '@/types/portalTransparencia';
-import { Table } from 'lucide-react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Table, Plus } from 'lucide-react';
+// @ts-ignore
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
+import { useQuery } from '@tanstack/react-query';
 import { usePortalTransparencia } from '@/hooks/usePortalTransparencia';
 
 interface Setor {
@@ -60,20 +62,18 @@ const Documentos = ({ processos = [], setores = [] }: Props) => {
           {/* Header Section */}
           <div className="mb-8">
             <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-bold">Portal da Transparência</h1>
-              <div className="flex gap-4 items-center">
-                <span className="text-sm text-gray-500">
-                  {totalFiltrados} de {totalDocumentos} documento{totalDocumentos !== 1 ? 's' : ''} encontrado{totalFiltrados !== 1 ? 's' : ''}
-                </span>
-                <Tabs value={visualizacao} onValueChange={(value) => setVisualizacao(value as VisualizacaoTipo)}>
-                  <TabsList>
-                    <TabsTrigger value="Tabela" className="flex gap-2 items-center">
-                      <Table className="w-4 h-4" />
-                      <span className="hidden sm:inline">Tabela</span>
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
+
+              <span className="text-sm text-gray-500">
+                {totalFiltrados} de {totalDocumentos} documento{totalDocumentos !== 1 ? 's' : ''} encontrado{totalFiltrados !== 1 ? 's' : ''}
+              </span>
+              <Tabs value={visualizacao} onValueChange={(value) => setVisualizacao(value as VisualizacaoTipo)}>
+                <TabsList>
+                  <TabsTrigger value="Tabela" className="flex gap-2 items-center">
+                    <Table className="w-4 h-4" />
+                    <span className="hidden sm:inline">Tabela</span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
           </div>
 
@@ -96,6 +96,17 @@ const Documentos = ({ processos = [], setores = [] }: Props) => {
               </TabsContent>
             </Tabs>
           </div>
+
+          {/* Botão flutuante Novo Processo */}
+          <Button
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#4E1F14] text-white hover:bg-[#4E1F14]/90 shadow-lg rounded-full px-6 py-4 text-base"
+            style={{ minWidth: 0 }}
+            onClick={() => window.location.href = '/processos/create'}
+            aria-label="Novo Processo"
+          >
+            <Plus className="w-5 h-5" />
+            <span className="hidden sm:inline">Nova Solicitação</span>
+          </Button>
         </main>
       </div>
     </AuthenticatedLayout>

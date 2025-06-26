@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Header } from '@/Components/Header';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/Components/ui/tabs';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/Components/ui/table';
@@ -188,23 +189,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
 
       <div className="flex-1 p-6 space-y-6">
         <div className="mx-auto max-w-7xl">
-          {/* Navegação */}
-          <div className="flex items-center mb-6 space-x-4">
-            <button
 
-              className="flex items-center text-[#0A3D62] hover:text-[#CB991A] transition-colors"
-            >
-              <Home className="mr-2 w-5 h-5" />
-              Início
-            </button>
-            <button
-
-              className="flex items-center text-[#0A3D62] hover:text-[#CB991A] transition-colors"
-            >
-              <ArrowLeft className="mr-2 w-5 h-5" />
-              Voltar
-            </button>
-          </div>
 
           {/* Cabeçalho */}
           {/* <div className="flex justify-between items-center pb-6 border-b">
@@ -236,7 +221,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="usuarios" className="space-y-6">
               <Card className="shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-xl text-[#0A3D62]">Cadastrar novo servidor</CardTitle>
+                  <CardTitle className="text-xl text-[#4E1F14]">Cadastrar novo servidor</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
@@ -396,7 +381,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                       </div>
                     <Button
                       type="submit"
-                      className="mt-6 bg-[#0A3D62] hover:bg-[#0A3D62]/90 px-8"
+                      className="mt-6 bg-[#4E1F14] hover:bg-[#4E1F14]/90 px-8"
                       disabled={processing}
                     >
                       {processing ? 'Cadastrando...' : 'Cadastrar Servidor'}
@@ -407,7 +392,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
 
               <Card className="shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-xl text-[#0A3D62]">Servidores cadastrados</CardTitle>
+                  <CardTitle className="text-xl text-[#4E1F14]">Servidores cadastrados</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <Table>
@@ -464,7 +449,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="configuracoes">
               <Card className="shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-6 text-[#0A3D62]">Configurações do Município</h3>
+                  <h3 className="text-xl font-semibold mb-6 text-[#4E1F14]">Configurações do Município</h3>
                   <div className="space-y-6">
                     {/* Informações básicas */}
                     <div className="grid grid-cols-2 gap-6">
@@ -489,12 +474,12 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                     {/* Upload de arquivos */}
                     <div className="grid grid-cols-1 gap-6">
                       <div className="space-y-4">
-                        <h4 className="text-lg font-medium text-[#0A3D62]">Documentos e Logos</h4>
+                        <h4 className="text-lg font-medium text-[#4E1F14]">Documentos e Logos</h4>
 
                         <div className="grid grid-cols-3 gap-4">
                           <div className="space-y-2">
                             <Label>Brasão Municipal</Label>
-                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#0A3D62] transition-colors">
+                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4E1F14] transition-colors">
                               <Upload className="mx-auto mb-2 w-8 h-8 text-gray-400" />
                               <p className="text-sm text-gray-600">Clique para fazer upload</p>
                               <p className="text-xs text-gray-400">PNG, JPG até 2MB</p>
@@ -504,7 +489,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
 
                           <div className="space-y-2">
                             <Label>Logo da Administração</Label>
-                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#0A3D62] transition-colors">
+                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4E1F14] transition-colors">
                               <Upload className="mx-auto mb-2 w-8 h-8 text-gray-400" />
                               <p className="text-sm text-gray-600">Clique para fazer upload</p>
                               <p className="text-xs text-gray-400">PNG, JPG até 2MB</p>
@@ -514,7 +499,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
 
                           <div className="space-y-2">
                             <Label>Cartão CNPJ</Label>
-                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#0A3D62] transition-colors">
+                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4E1F14] transition-colors">
                               <Upload className="mx-auto mb-2 w-8 h-8 text-gray-400" />
                               <p className="text-sm text-gray-600">Clique para fazer upload</p>
                               <p className="text-xs text-gray-400">PDF até 5MB</p>
@@ -523,15 +508,15 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                           </div>
                         </div>
 
-                        <div className="p-4 bg-blue-50 rounded-lg">
-                          <p className="text-sm text-blue-800">
+                        <div className="p-4 bg-[#D09290]/10 rounded-lg">
+                          <p className="text-sm text-[#4E1F14]">
                             <strong>Importante:</strong> Os dados do Cartão CNPJ serão utilizados para alimentar automaticamente as informações do município em todas as demais espadas e etapas da plataforma.
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <Button className="mt-6 bg-[#0A3D62] hover:bg-[#0A3D62]/90">
+                  <Button className="mt-6 bg-[#4E1F14] hover:bg-[#4E1F14]/90">
                     Salvar configurações
                   </Button>
                 </CardContent>
@@ -541,11 +526,11 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="legislacao">
               <Card className="shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-6 text-[#0A3D62]">Legislação Municipal</h3>
+                  <h3 className="text-xl font-semibold mb-6 text-[#4E1F14]">Legislação Municipal</h3>
 
                   <div className="space-y-6">
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <p className="text-sm text-blue-800">
+                    <div className="p-4 bg-[#D09290]/10 rounded-lg">
+                      <p className="text-sm text-[#4E1F14]">
                         Cadastre as normas municipais relacionadas à Lei 14.133/21 que regulamentam as licitações e contratos no seu município.
                       </p>
                     </div>
@@ -584,7 +569,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                     {/* Upload de arquivo */}
                     <div className="space-y-2">
                       <Label>Arquivo da Legislação</Label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#0A3D62] transition-colors">
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#4E1F14] transition-colors">
                         <Upload className="mx-auto mb-4 w-12 h-12 text-gray-400" />
                         <p className="mb-2 text-lg text-gray-600">Clique para fazer upload ou arraste o arquivo aqui</p>
                         <p className="text-sm text-gray-400">PDF, DOC, DOCX até 10MB</p>
@@ -595,13 +580,13 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                       </div>
                     </div>
 
-                    <Button className="bg-[#0A3D62] hover:bg-[#0A3D62]/90">
+                    <Button className="bg-[#4E1F14] hover:bg-[#4E1F14]/90">
                       Cadastrar Legislação
                     </Button>
 
                     {/* Lista de legislações cadastradas */}
                     <div className="pt-6 border-t">
-                      <h4 className="text-lg font-medium mb-4 text-[#0A3D62]">Legislações Cadastradas</h4>
+                      <h4 className="text-lg font-medium mb-4 text-[#4E1F14]">Legislações Cadastradas</h4>
                       <div className="space-y-3">
                         <div className="flex justify-between items-center p-4 rounded-lg border">
                           <div>
@@ -635,7 +620,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="capacitacao">
               <Card className="shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-[#0A3D62]">Programa de Capacitação</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-[#4E1F14]">Programa de Capacitação</h3>
                   <p className="text-gray-600">Acompanhe o progresso dos treinamentos</p>
                 </CardContent>
               </Card>
@@ -644,7 +629,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="cronograma">
               <Card className="shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-[#0A3D62]">Cronograma de Implantação</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-[#4E1F14]">Cronograma de Implantação</h3>
                   <p className="text-gray-600">Acompanhe as etapas e prazos do projeto</p>
                 </CardContent>
               </Card>

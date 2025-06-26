@@ -112,13 +112,13 @@ const Setores: React.FC<Props> = ({ setores }) => {
             <button
               type="submit"
               disabled={processing}
-              className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              className="px-4 py-2 text-white bg-[#4E1F14] rounded-md hover:bg-[#4E1F14]/90 focus:outline-none focus:ring-2 focus:ring-[#4E1F14] focus:ring-offset-2 disabled:opacity-50"
             >
               {processing ? 'Salvando...' : 'Salvar'}
             </button>
             <Link
               href="/setores"
-              className="px-4 py-2 text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="px-4 py-2 text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#4E1F14] focus:ring-offset-2"
             >
               Cancelar
             </Link>
@@ -149,14 +149,14 @@ const Setores: React.FC<Props> = ({ setores }) => {
                   <TableCell className="space-x-2 text-right">
                     <Link
                       href={`/setores/${setor.id}/edit`}
-                      className="text-indigo-600 hover:text-indigo-900"
+                      className="text-[#D09290] hover:text-[#D09290]/80"
                     >
                       Editar
                     </Link>
                     <Button
                       variant="link"
                       onClick={() => handleViewUsuarios(setor)}
-                      className="text-green-600 hover:text-green-900"
+                      className="text-[#4E1F14] hover:text-[#4E1F14]/80"
                     >
                       Ver Usuários
                     </Button>

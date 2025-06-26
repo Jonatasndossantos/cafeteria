@@ -3,7 +3,6 @@ import { router, Head } from '@inertiajs/react';
 import IdentificacaoBloco from '@/Components/espadaComponente1/tabs/planejamento/IdentificacaoBloco';
 import { Button } from '@/Components/ui/button';
 import { Header } from '@/Components/Header';
-import { Footer } from '@/Components/Footer';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 
@@ -12,7 +11,7 @@ const queryClient = new QueryClient();
 export default function Processos() {
 
     const handleBack = () => {
-        router.visit('/ambienteservidor');
+        router.visit('/documentos');
     };
 
     return (
@@ -28,15 +27,14 @@ export default function Processos() {
                                 className="flex items-center gap-2 text-[#0A3D62] hover:text-[#CB991A] border-[#0A3D62] hover:border-[#CB991A]"
                             >
                                 <ArrowLeft className="w-4 h-4" />
-                                Voltar para Minhas Demandas
+                                Voltar
                             </Button>
-                            <h1 className="text-2xl font-bold">Novo Processo</h1>
+                            <h1 className="text-2xl font-bold">Nova Solicitação</h1>
                         </div>
                         <IdentificacaoBloco />
 
                     </div>
                 </main>
-                <Footer />
             </div>
     );
 }
