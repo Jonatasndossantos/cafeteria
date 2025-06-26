@@ -5,7 +5,6 @@ import { Link } from '@inertiajs/react';
 
 interface WelcomeProps extends Page {
     canLogin: boolean;
-    canRegister: boolean;
     laravelVersion: string;
     phpVersion: string;
 }
@@ -33,7 +32,7 @@ function DocumentCard({ title, icon: Icon }: { title: string; icon: React.Elemen
     );
 }
 
-function Welcome({ canLogin, canRegister, laravelVersion, phpVersion }: WelcomeProps) {
+function Welcome({ canLogin, laravelVersion, phpVersion }: WelcomeProps) {
     return (
         <div className="min-h-screen font-sans bg-slate-900 text-slate-200">
             {/* Navigation */}
