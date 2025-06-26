@@ -1,20 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Web\Espadas\Espada1Controller;
-use App\Http\Controllers\Web\Espadas\Espada2Controller;
-use App\Http\Controllers\EspadasController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProcessoController;
 use App\Http\Controllers\SetorController;
 use App\Http\Controllers\GestaoUsuariosController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\ProcessoController;
-use App\Http\Controllers;
 use App\Http\Controllers\Web\Espadas;
-use App\Models\Arquivo;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Models\Setor;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -24,51 +18,15 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 Route::middleware(['auth:sanctum','verified'])->group(function ()
 {
-
-
-
-    // Document routes - must come before resource routes to avoid conflicts
-    Route::match(['get', 'post'], '/document/{type}', [DocumentController::class, 'getOrCreateDocument'])
-        ->name('document.create')
-        ->where('type', 'Planejamento|Espada1|Espada2|Espada3|Espada4|Espada5|Espada6|Espada7');
-
-    Route::match(['get', 'post'], '/save/{type}', [DocumentController::class, 'store'])
-        ->name('document.save')
-        ->where('type', 'Planejamento|espada1|espada2|espada3|espada4|espada5');
-
-
-        Route::get('/Espadas', [EspadasController::class, 'show'])->name('Espadas.show');
-
-        // Define specific routes before resource to avoid conflicts
-
-
-
-
-
-
-    // Individual espada routes for backward compatibility
-    Route::get('/espada1', function () {
-        return Inertia::render('Espadas/Espada1/Create');
-    })->name('espada1');
-    // Individual espada routes for backward compatibility
-    Route::get('/espada2', function () {
-        return Inertia::render('Espadas/Espada2/Create');
-    })->name('espada2');
-    // Individual espada routes for backward compatibility
-    Route::get('/espada3', function () {
-        return Inertia::render('Espadas/Espada3/Create');
-    })->name('espada3');
-
-    Route::get('/espada4', function () {
-        return Inertia::render('Espadas/Espada4/Create');
-    })->name('espada4');
-
-    Route::get('/espada5', function () {
-        return Inertia::render('Espadas/Espada5/Create');
-    })->name('espada5');
-
     Route::get('/ambienteservidor', [ProcessoController::class, 'ambienteServidor'])->name('ambienteServidor');
 
     Route::get('/perfil', function () {
@@ -103,7 +61,7 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
     Route::post('/processos', [ProcessoController::class, 'store'])->name('processos.store');
     Route::get('/processos/{id}', [ProcessoController::class, 'show'])->name('processos.show');
 
-    Route::get('/dashboard', Controllers\DashboardController::class);
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
 
 // Rotas que requerem acesso de admin
@@ -129,6 +87,5 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->group(function () {
 
 Route::get('/api/setores', [SetorController::class, 'index'])->name('setores.index');
 
-Route::get('/teste', function () {
-    return Inertia::render('Teste/Teste');
-})->name('teste');
+
+require __DIR__.'/auth.php';

@@ -10,13 +10,18 @@ interface FlashMessages {
 }
 
 interface PageProps extends Record<string, any> {
-  flash: FlashMessages;
+  auth: {
+    user: any;
+  };
+  flash?: FlashMessages;
 }
 
 export function useFlashMessages() {
   const { flash } = usePage<PageProps>().props;
 
   useEffect(() => {
+    if (!flash) return;
+
     if (flash.success) {
       toast({
         title: 'Sucesso',
@@ -49,4 +54,4 @@ export function useFlashMessages() {
       });
     }
   }, [flash]);
-} 
+}

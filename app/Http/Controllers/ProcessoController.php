@@ -15,7 +15,7 @@ class ProcessoController extends Controller
     {
         try {
             //\Log::info('ProcessoController@store - Iniciando criação de processo', $request->all());
-            
+
             $validated = $request->validate([
                 'numero_processo' => 'required|string|unique:processos',
                 'modalidade' => 'nullable|string',
@@ -54,7 +54,7 @@ class ProcessoController extends Controller
             $arquivos = $arquivos->load('usuario');
 
             $processo = $processo->load('setor', 'usuario');
-            
+
             return Inertia::render('Espadas/Processos/Show', [
                 'processo' => $processo,
                 'arquivos' => $arquivos,
@@ -63,7 +63,7 @@ class ProcessoController extends Controller
                 ],
                 'setor' => Setor::all()
             ]);
-            
+
         } catch (\Exception $e) {
             \Log::error('ProcessoController@store - Erro ao criar processo', [
                 'error' => $e->getMessage(),
@@ -71,7 +71,7 @@ class ProcessoController extends Controller
             ]);
 
             return redirect()->back()->with('error', 'Erro ao criar processo: ' . $e->getMessage());
-            
+
         }
     }
 
@@ -86,7 +86,7 @@ class ProcessoController extends Controller
 
             // \Log::info('ProcessoController@index - Processos encontrados:', ['count' => $processos->count()]);
 
-            return Inertia::render('Espadas/Documentos', [
+            return Inertia::render('Processo/Documentos', [
                 'processos' => $processos,
                 'auth' => [
                     'user' => auth()->user()
@@ -128,7 +128,7 @@ class ProcessoController extends Controller
         $arquivosAtual = Arquivo::where('processo_id', $numeroProcesso)->orderBy('created_at', 'desc')->first();
         $processo = $processo->load('usuario');
 
-        // dd($processo);   
+        // dd($processo);
         return Inertia::render('Espadas/Processos/Show', [
             'processo' => $processo,
             'arquivos' => $arquivos,
@@ -150,7 +150,7 @@ class ProcessoController extends Controller
         ]);
     }
 
-    
+
 
 
 }

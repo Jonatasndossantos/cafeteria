@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -17,7 +16,6 @@ class Usuario extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use Notifiable;
-    use TwoFactorAuthenticatable;
     use HasApiTokens;
     use SoftDeletes;
 
@@ -60,4 +58,4 @@ class Usuario extends Authenticatable
     {
         return $this->belongsTo(Setor::class);
     }
-} 
+}

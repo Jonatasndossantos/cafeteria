@@ -21,7 +21,7 @@ export default function Processos() {
                 <Header />
                 <main className="container px-4 py-8 mx-auto">
                     <div className="p-6 bg-white rounded-lg shadow">
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex justify-between items-center mb-6">
                             <Button
                                 variant="outline"
                                 onClick={handleBack}

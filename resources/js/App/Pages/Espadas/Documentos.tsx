@@ -4,8 +4,7 @@ import { VisualizacaoTabela } from '@/Components/portalTransparencia/Visualizaca
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { VisualizacaoTipo } from '@/types/portalTransparencia';
 import { Table } from 'lucide-react';
-// @ts-ignore
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { usePortalTransparencia } from '@/hooks/usePortalTransparencia';
 
 interface Setor {

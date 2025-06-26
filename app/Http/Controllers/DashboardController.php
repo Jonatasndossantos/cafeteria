@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         if(auth()->user()->perfilAcesso == 'admin'){
-            return Inertia::render('Espadas/Documentos', [
+            return Inertia::render('Processo/Documentos', [
                 'auth' => [
                     'user' => auth()->user(),
                 ],
