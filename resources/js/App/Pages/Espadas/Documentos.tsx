@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Footer } from '@/Components/Footer';
 import { FiltrosAvancados } from '@/Components/portalTransparencia/FiltrosAvancados';
 import { VisualizacaoTabela } from '@/Components/portalTransparencia/VisualizacaoTabela';
 import { Button } from '@/Components/ui/button';

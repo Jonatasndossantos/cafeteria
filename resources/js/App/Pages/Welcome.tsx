@@ -111,27 +111,6 @@ function Welcome({ canLogin, canRegister, laravelVersion, phpVersion }: WelcomeP
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="py-12 border-t bg-slate-900 border-slate-800">
-                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-                        <div className="flex items-center gap-2 text-yellow-500">
-                            <Shield size={20} />
-                            <span className="font-serif font-bold">LUMEN</span>
-                        </div>
-
-                        <div className="font-serif text-center text-slate-400 md:text-left">
-                            Built under the guidance of Law 14.133/2021 — Plataforma LUMEN
-                        </div>
-
-                        <div className="flex gap-6 text-slate-400">
-                            <a href="#" className="transition-colors hover:text-yellow-500">Terms</a>
-                            <a href="#" className="transition-colors hover:text-yellow-500">Support</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-
             <div className="mt-4 text-sm text-center text-slate-400">
                 Laravel v{laravelVersion} (PHP v{phpVersion})
             </div>

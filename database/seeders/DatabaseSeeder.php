@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
 
         // Create sectors
         $setores = [
-            ['nome' => 'Secretaria de Educação', 'sigla' => 'EDU'],
-            ['nome' => 'Secretaria de Saúde', 'sigla' => 'SAU'],
-            ['nome' => 'Secretaria de Administração', 'sigla' => 'ADM'],
-            ['nome' => 'Secretaria de Finanças', 'sigla' => 'FIN'],
-            ['nome' => 'Secretaria de Obras', 'sigla' => 'OBR'],
+            ['nome' => 'Produção', 'sigla' => 'PRO'],
+            ['nome' => 'Marketing', 'sigla' => 'MKT'],
+            ['nome' => 'Administração', 'sigla' => 'ADM'],
+            ['nome' => 'Finanças', 'sigla' => 'FIN'],
+            ['nome' => 'Atendimento', 'sigla' => 'ATE'],
         ];
 
         foreach ($setores as $setor) {

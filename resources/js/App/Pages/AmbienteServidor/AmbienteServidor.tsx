@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Header } from '@/Components/Header';
-import { Footer } from '@/Components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { Button } from '@/Components/ui/button';
 import { Clipboard, FileText, Shield, BarChart3, MessageCircle, Settings, ArrowLeft, Plus } from 'lucide-react';

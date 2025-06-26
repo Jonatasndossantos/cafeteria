@@ -101,13 +101,7 @@ export const Header = () => {
               </Dropdown.Trigger>
               <Dropdown.Content align="right" width="48">
                 <Dropdown.Link href={route('perfil')}>Perfil</Dropdown.Link>
-                <Dropdown.Link href={route('ambienteServidor')}>Ambiente de Servidor</Dropdown.Link>
-                {usuario?.perfilAcesso === 'admin' && (
-                  <>
-                    <Dropdown.Link href={route('gestao-usuarios.index')}>Gestão de Usuários</Dropdown.Link>
-                    <Dropdown.Link href={route('setores.index')}>Gestão de Setores</Dropdown.Link>
-                  </>
-                )}
+                
 
                   <Dropdown.Link
                     href={route('logout')}

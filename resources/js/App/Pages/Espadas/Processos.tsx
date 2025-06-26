@@ -3,7 +3,6 @@ import { router, Head } from '@inertiajs/react';
 import IdentificacaoBloco from '@/Components/espadaComponente1/tabs/planejamento/IdentificacaoBloco';
 import { Button } from '@/Components/ui/button';
 import { Header } from '@/Components/Header';
-import { Footer } from '@/Components/Footer';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 
@@ -36,7 +35,6 @@ export default function Processos() {
 
                     </div>
                 </main>
-                <Footer />
             </div>
     );
 }
