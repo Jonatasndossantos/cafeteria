@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Processo;
+use App\Models\Setor;
 
 class DashboardController extends Controller
 {
@@ -19,14 +20,16 @@ class DashboardController extends Controller
                     'user' => auth()->user(),
                 ],
                 'processos' => Processo::all(),
+                'setores' => Setor::all(),
             ]);
         }
-        
+
         return Inertia::render('AmbienteServidor/AmbienteServidor', [
             'auth' => [
                 'user' => auth()->user(),
             ],
             'processos' => Processo::all(),
+            'setores' => Setor::all(),
         ]);
 
     }

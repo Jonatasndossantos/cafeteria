@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Bell, LogOut } from 'lucide-react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
-import { usePage } from '@inertiajs/react';
-import { useQuery } from '@tanstack/react-query';
 import logoEspresso from "@/Components/brasaopref/espresso-damore.png"
 
 interface Usuario {
@@ -19,24 +17,17 @@ interface Notificacao {
   id: number;
   titulo: string;
   urgencia: string;
-} 
+}
 
 function useUsuario() {
-    const usuario = (usePage().props.auth.user)
-    // console.log(usePage().props.auth.user);
-    return useQuery({
-      queryKey: ['usuario'],
-      queryFn: async (): Promise<any> => {
-        return usuario;
-      },
-    })
+    return (usePage().props.auth.user) as any;
   }
 
 
 export const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const { data: usuario } = useUsuario();
+  const usuario = useUsuario();
   const notificacoes = [];
 
   const obterIniciais = (nome: string) => {
@@ -57,23 +48,24 @@ export const Header = () => {
     // Implementar lógica de logout aqui
     console.log('Logout clicked');
   };
+  console.log(usuario);
 
   return (
     <header className="bg-gradient-to-r from-[#CDA77A] to-[#4E1F14] text-white">
       <div className="px-20 mx-auto">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center gap-x-6">
+          <div className="flex gap-x-6 items-center">
             <Link href="/dashboard" className="shrink-0">
               <img
                 src={logoEspresso}
                 alt="Logo Espresso D'Amore"
-                className="block w-20 h-20 rounded-full object-cover"
+                className="block object-cover w-20 h-20 rounded-full"
                 aria-label="Logo Espresso D'Amore"
               />
             </Link>
           </div>
 
-          <div className="flex items-center gap-x-4">
+          <div className="flex gap-x-4 items-center">
             <button
               className="relative p-2 rounded-full hover:bg-[#4E1F14] transition-colors"
               aria-label="Notificações"
