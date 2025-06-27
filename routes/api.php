@@ -53,7 +53,7 @@ Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy']);
 Route::apiResource('setores', SetorController::class);
 Route::get('setores/{id}/usuarios', [SetorController::class, 'usuarios']);
 
-// Rota para sugestões 
+// Rota para sugestões
 Route::get('/suggestions', Controllers\Api\SuggestionController::class);
 
 
@@ -78,4 +78,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Rota para download de PDF de documentos
 Route::get('/documentos/{id}/pdf', [DocumentoPdfController::class, 'downloadPdf']);
+
+// Rotas para administração de usuários do Supabase
+Route::middleware(['auth:sanctum'])->prefix('supabase')->group(function () {
+    Route::get('/users', [Controllers\Api\SupabaseUsersController::class, 'index']);
+    Route::post('/users', [Controllers\Api\SupabaseUsersController::class, 'store']);
+    Route::get('/users/{id}', [Controllers\Api\SupabaseUsersController::class, 'show']);
+    Route::put('/users/{id}', [Controllers\Api\SupabaseUsersController::class, 'update']);
+    Route::delete('/users/{id}', [Controllers\Api\SupabaseUsersController::class, 'destroy']);
+    Route::post('/users/{id}/ban', [Controllers\Api\SupabaseUsersController::class, 'ban']);
+    Route::post('/users/{id}/unban', [Controllers\Api\SupabaseUsersController::class, 'unban']);
+    Route::post('/users/{id}/confirm-email', [Controllers\Api\SupabaseUsersController::class, 'confirmEmail']);
+});
 

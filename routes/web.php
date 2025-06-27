@@ -83,5 +83,12 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->group(function () {
 
 Route::get('/api/setores', [SetorController::class, 'index'])->name('setores.index');
 
+Route::get('/usuarios/supabase', function () {
+    return Inertia::render('Usuarios/SupabaseUsers', [
+        'auth' => [
+            'user' => auth()->user()
+        ]
+    ]);
+})->middleware(['auth', 'verified'])->name('usuarios.supabase');
 
 require __DIR__.'/auth.php';
