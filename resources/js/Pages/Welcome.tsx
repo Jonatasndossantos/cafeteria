@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Instagram, Facebook, Youtube, Coffee, Users, Gift, ShoppingBag, Cake, BookOpen, Home } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Youtube, Coffee, Users, Gift, ShoppingBag, Cake, BookOpen, Home, Leaf, Sandwich } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+import cafe from '@/Pages/media/cafe.jpg';
+import camomila from '@/Pages/media/camomila.jpg';
+import chescake from '@/Pages/media/chescake.jpg';
+import sanduiche from '@/Pages/media/sanduiche.jpg';
+import imagem from '@/Pages/media/espresso-damore.png'
+import exterior1 from '@/Pages/media/exterior1.jpeg';
+import exterior2 from '@/Pages/media/exterior2.jpeg';
+import exterior3 from '@/Pages/media/exterior3.jpeg';
+import exterior4 from '@/Pages/media/exterior4.jpeg';
+import interior1 from '@/Pages/media/interior1.jpeg';
+import interior2 from '@/Pages/media/interior2.jpeg';
+import interior3 from '@/Pages/media/interior3.jpeg';
+import interior4 from '@/Pages/media/interior4.jpeg';
 
 const NAV_LINKS = [
-  { label: 'Conheça', href: '/experiencia-unica' },
-  { label: 'Cardápio', href: '/cardapio-digital' },
-  { label: 'Eventos', href: '/eventos' },
-  { label: 'Bolos', href: '/bolos-especiais' },
-  { label: 'Shop', href: 'https://shop.wecoffee.com.br', external: true },
-  { label: 'Gift Card', href: '/gift-card' },
-  { label: 'Contato', href: '/contato' },
+  
   { label: 'Login', href: '/login' },
 ];
 
 const PRODUCT_CARDS = [
-  { title: 'Bebidas', img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80', href: '/cardapio-digital', icon: Coffee },
-  { title: 'Doces', img: 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80', href: '/cardapio-digital', icon: Cake },
-  { title: 'Pães', img: 'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80', href: '/cardapio-digital', icon: BookOpen },
-  { title: 'Eventos', img: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80', href: '/eventos', icon: Users },
-  { title: 'Gift Card', img: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80', href: '/gift-card', icon: Gift },
+  { title: 'Cafés', img: cafe, icon: Coffee },
+  { title: 'Chás', img: camomila, icon: Leaf },
+  { title: 'Salgados', img: sanduiche, icon: Sandwich },
+  { title: 'Doces', img: chescake, icon: Cake },
 ];
 
 const SOCIALS = [
@@ -150,7 +156,7 @@ export default function Welcome() {
       }`}>
         <div className="flex justify-between items-center px-4 mx-auto max-w-7xl h-20 sm:px-8">
           <Link href="/" className="flex gap-2 items-center group" aria-label="Home">
-            <img src="/logo-wecoffee.png" alt="Logo We Coffee" className="w-auto h-10 transition-transform duration-300 group-hover:scale-110" />
+            <img src={imagem} alt="Logo Espresso D'Amore" className="w-12 h-12 rounded-full bg-[#f8f6f2] p-1 transition-transform duration-300 group-hover:scale-110" />
             <span className="font-serif text-2xl font-bold text-[#4E1F14] transition-colors duration-300 group-hover:text-[#D09290]">D'Amore</span>
           </Link>
           <nav className="hidden gap-8 items-center md:flex">
@@ -194,7 +200,7 @@ export default function Welcome() {
             <div className="flex flex-col gap-6 p-6 bg-white shadow-md animate-slideInRight">
               <div className="flex justify-between items-center">
                 <Link href="/" className="flex gap-2 items-center group" aria-label="Home">
-                  <img src="/logo-wecoffee.png" alt="Logo We Coffee" className="w-auto h-10 transition-transform duration-300 group-hover:scale-110" />
+                  <img src={imagem} alt="Logo Espresso D'Amore" className="w-12 h-12 rounded-full bg-[#f8f6f2] p-1 transition-transform duration-300 group-hover:scale-110" />
                   <span className="font-serif text-2xl font-bold text-[#4E1F14] transition-colors duration-300 group-hover:text-[#D09290]">D'Amore</span>
                 </Link>
                 <button
@@ -250,15 +256,9 @@ export default function Welcome() {
             Uma experiência única em cafeteria
           </h1>
           <p className="text-xl md:text-2xl text-[#4E1F14] mb-8 font-medium animate-slideInUp" style={{ animationDelay: '300ms' }}>
-            Bebidas, doces, pães e momentos especiais. Sinta o aroma, prove o sabor, viva o We Coffee.
+            Bebidas, doces, pães e momentos especiais. Sinta o aroma, prove o sabor, viva D'Amore.
           </p>
-          <a
-            href="/cardapio-digital"
-            className="inline-block px-8 py-4 rounded-full bg-[#D09290] text-white font-bold text-lg shadow-lg hover:bg-[#4E1F14] transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-bounceIn"
-            style={{ animationDelay: '600ms' }}
-          >
-            Ver cardápio
-          </a>
+       
         </div>
       </section>
 
@@ -268,11 +268,10 @@ export default function Welcome() {
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-center text-[#4E1F14] mb-12">Nossos destaques</h2>
           </AnimatedSection>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 justify-center max-w-4xl mx-auto">
             {PRODUCT_CARDS.map((card, index) => (
               <AnimatedSection key={card.title} delay={index * 200}>
-                <a
-                  href={card.href}
+                <div
                   className="flex overflow-hidden flex-col items-center text-center bg-white rounded-2xl shadow-lg transition-all duration-500 transform group hover:shadow-2xl hover:-translate-y-2"
                 >
                   <div className="w-full h-48 bg-[#f8f6f2] flex items-center justify-center overflow-hidden">
@@ -288,7 +287,7 @@ export default function Welcome() {
                       <h3 className="font-serif text-xl font-bold text-[#4E1F14] transition-colors duration-300 group-hover:text-[#D09290]">{card.title}</h3>
                     </div>
                   </div>
-                </a>
+                </div>
               </AnimatedSection>
             ))}
           </div>
@@ -307,14 +306,7 @@ export default function Welcome() {
               Somos referência de cafeteria inovadora! Nossas unidades possuem um espaço com alto potencial de compartilhamento e a experiência presencial é incrível. Venha nos visitar e surpreenda-se!
             </p>
           </AnimatedSection>
-          <AnimatedSection delay={400}>
-            <a
-              href="/experiencia-unica"
-              className="inline-block px-8 py-4 rounded-full bg-[#D09290] text-white font-bold text-lg shadow-lg hover:bg-white hover:text-[#4E1F14] transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-            >
-              Conheça
-            </a>
-          </AnimatedSection>
+         
         </div>
       </section>
 
@@ -329,12 +321,12 @@ export default function Welcome() {
               <div className="space-y-6">
                 <h3 className="text-2xl font-serif font-bold text-[#4E1F14] text-center">Interior</h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[1, 2, 3, 4].map((item, index) => (
-                    <AnimatedSection key={item} delay={index * 150}>
+                  {[interior1, interior2, interior3, interior4].map((img, index) => (
+                    <AnimatedSection key={index} delay={index * 150}>
                       <div className="overflow-hidden rounded-2xl shadow-lg transition-all duration-500 transform hover:scale-105">
                         <img
-                          src={`https://images.unsplash.com/photo-${1554118811 + item}?auto=format&fit=crop&w=600&q=80`}
-                          alt={`Interior da cafeteria - vista ${item}`}
+                          src={img}
+                          alt={`Interior da cafeteria - vista ${index + 1}`}
                           className="object-cover w-full h-64 transition-transform duration-700 hover:scale-110"
                         />
                       </div>
@@ -347,12 +339,12 @@ export default function Welcome() {
               <div className="space-y-6">
                 <h3 className="text-2xl font-serif font-bold text-[#4E1F14] text-center">Exterior</h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[1, 2, 3, 4].map((item, index) => (
-                    <AnimatedSection key={item} delay={index * 150}>
+                  {[exterior1, exterior2, exterior3, exterior4].map((img, index) => (
+                    <AnimatedSection key={index} delay={index * 150}>
                       <div className="overflow-hidden rounded-2xl shadow-lg transition-all duration-500 transform hover:scale-105">
                         <img
-                          src={`https://images.unsplash.com/photo-${1445116572 + item}?auto=format&fit=crop&w=600&q=80`}
-                          alt={`Exterior da cafeteria - vista ${item}`}
+                          src={img}
+                          alt={`Exterior da cafeteria - vista ${index + 1}`}
                           className="object-cover w-full h-64 transition-transform duration-700 hover:scale-110"
                         />
                       </div>
@@ -365,85 +357,33 @@ export default function Welcome() {
         </div>
       </section>
 
-      {/* Equipe com animação baseada no scroll */}
-      <section className="py-20 bg-[#f8f6f2] text-center">
-        <div className="px-4 mx-auto max-w-3xl">
-          <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#4E1F14] mb-6">Faça parte da nossa equipe</h2>
-          </AnimatedSection>
-          <AnimatedSection delay={200}>
-            <p className="text-lg md:text-xl mb-8 text-[#4E1F14]">
-              Acreditamos que pessoas fazem a diferença! Venha fazer parte do nosso time. Todos os talentos são bem-vindos aqui, queremos te conhecer.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={400}>
-            <a
-              href="/contato"
-              className="inline-block px-8 py-4 rounded-full bg-[#D09290] text-white font-bold text-lg shadow-lg hover:bg-[#4E1F14] transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-            >
-              Junte-se a nós
-            </a>
-          </AnimatedSection>
-        </div>
-      </section>
+  
 
       {/* Rodapé com animação baseada no scroll */}
       <footer className="bg-[#4E1F14] text-white py-12 mt-auto">
         <div className="flex flex-col gap-8 justify-between items-center px-4 mx-auto max-w-7xl sm:px-8 md:flex-row">
-          <AnimatedSection>
-            <div className="flex gap-2 items-center group">
-              <img src="/logo-wecoffee.png" alt="Logo We Coffee" className="w-auto h-8 transition-transform duration-300 group-hover:scale-110" />
-              <span className="font-serif text-xl font-bold transition-colors duration-300 group-hover:text-[#D09290]">D'Amore</span>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={200}>
-            <nav className="flex flex-wrap gap-6 justify-center">
-              {NAV_LINKS.map((link, index) => (
-                link.external ? (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#D09290] transition-all duration-300 transform hover:scale-110"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="hover:text-[#D09290] transition-all duration-300 transform hover:scale-110"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              ))}
-            </nav>
-          </AnimatedSection>
-          <AnimatedSection delay={400}>
-            <div className="flex gap-4">
-              {SOCIALS.map(({ icon: Icon }, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  aria-label="Social media"
-                  className="hover:text-[#D09290] transition-all duration-300 transform hover:scale-125 hover:rotate-12"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <Icon className="w-6 h-6" />
-                </a>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-        <AnimatedSection delay={600}>
-          <div className="mt-8 text-center text-sm text-[#D09290]">
-            © {new Date().getFullYear()} D'Amore — Todos os direitos reservados.
+          <div className="flex gap-2 items-center group">
+            <img src={imagem} alt="Logo Espresso D'Amore" className="w-10 h-10 rounded-full bg-[#f8f6f2] p-1 transition-transform duration-300 group-hover:scale-110" />
+            <span className="font-serif text-xl font-bold transition-colors duration-300 group-hover:text-[#D09290]">D'Amore</span>
           </div>
-        </AnimatedSection>
+         
+          <div className="flex gap-4">
+            {SOCIALS.map(({ icon: Icon }, index) => (
+              <a
+                key={index}
+                href="#"
+                aria-label="Social media"
+                className="hover:text-[#D09290] transition-all duration-300 transform hover:scale-125 hover:rotate-12"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <Icon className="w-6 h-6" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="mt-8 text-center text-sm text-white">
+          © {new Date().getFullYear()} D'Amore — Todos os direitos reservados.
+        </div>
       </footer>
     </div>
   );
