@@ -50,7 +50,6 @@ Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update']);
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy']);
 
 // Setores routes
-Route::apiResource('setores', SetorController::class);
 Route::get('setores/{id}/usuarios', [SetorController::class, 'usuarios']);
 
 // Rota para sugestões
@@ -66,7 +65,7 @@ Route::get('/teste', Controllers\TesteController::class);
 
 // Rotas que mandam dados do usuario (web)     ops(isso foi configurado no sanctum)
     // Documentos
-Route::middleware(['auth:sanctum', 'web'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('documents', DocumentController::class);
 });
 

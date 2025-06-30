@@ -21,13 +21,38 @@ class ProdutoController extends Controller
             $query->where('categoria', $request->categoria);
         }
 
-        // Busca por nome
+        // Busca por nome ou categoria
         if ($request->filled('search')) {
-            $query->where('nome', 'like', '%' . $request->search . '%');
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nome', 'ilike', '%' . $search . '%')
+                  ->orWhere('categoria', 'ilike', '%' . $search . '%');
+            });
         }
 
-        $produtos = $query->orderBy('nome')
-                         ->paginate(12)
+        // Filtro por preço mínimo
+        if ($request->filled('preco_min')) {
+            $query->where('preco', '>=', $request->preco_min);
+        }
+
+        // Filtro por preço máximo
+        if ($request->filled('preco_max')) {
+            $query->where('preco', '<=', $request->preco_max);
+        }
+
+        // Ordenação
+        $orderBy = $request->get('order_by', 'nome');
+        $orderDirection = $request->get('order_direction', 'asc');
+
+        // Validar campos de ordenação permitidos
+        $allowedOrderFields = ['nome', 'preco', 'categoria'];
+        if (!in_array($orderBy, $allowedOrderFields)) {
+            $orderBy = 'nome';
+        }
+
+        $query->orderBy($orderBy, $orderDirection);
+
+        $produtos = $query->paginate(12)
                          ->withQueryString();
 
         // Buscar categorias únicas para o filtro
@@ -36,10 +61,20 @@ class ProdutoController extends Controller
                             ->orderBy('categoria')
                             ->pluck('categoria');
 
+        // Estatísticas para o dashboard
+        $stats = [
+            'total_produtos' => (int) Produto::count(),
+            'categorias_count' => (int) $categorias->count(),
+            'preco_medio' => Produto::avg('preco') ? (float) Produto::avg('preco') : null,
+            'preco_min' => Produto::min('preco') ? (float) Produto::min('preco') : null,
+            'preco_max' => Produto::max('preco') ? (float) Produto::max('preco') : null,
+        ];
+
         return Inertia::render('Produtos/Index', [
             'produtos' => $produtos,
             'categorias' => $categorias,
-            'filtros' => $request->only(['categoria', 'search'])
+            'filtros' => $request->only(['categoria', 'search', 'preco_min', 'preco_max', 'order_by', 'order_direction']),
+            'stats' => $stats
         ]);
     }
 

@@ -15,6 +15,14 @@ export interface Produto {
     imagem_url?: string;
 }
 
+export interface ProdutoStats {
+    total_produtos: number;
+    categorias_count: number;
+    preco_medio: number | null;
+    preco_min: number | null;
+    preco_max: number | null;
+}
+
 export interface PaginatedResponse<T> {
     data: T[];
     current_page: number;

@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth:sanctum','verified'])->group(function ()
+Route::middleware(['auth'])->group(function ()
 {
     Route::get('/ambienteservidor', [ProcessoController::class, 'ambienteServidor'])->name('ambienteServidor');
 
@@ -40,15 +40,12 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
 
 
     // Rota para listar documentos
-    Route::get('/documentos', [ProcessoController::class, 'index'])->name('documents.index');
 
 
-    Route::get('/espada1', function () {return back();});
     Route::post('/espada1', [Espadas\Espada1Controller::class, 'store'])->name('espada1.store');
     Route::get('/espada1/{id}', [Espadas\Espada1Controller::class, 'show'])->name('espada1.show');
     Route::post('/espada1/{id}', [Espadas\Espada1Controller::class, 'update'])->name('espada1.update');
 
-    Route::get('/planejamento', function () {return back();});
     Route::post('/planejamento', [Espadas\PlanejamentoController::class, 'store'])->name('planejamento.store');
     Route::get('/planejamento/{id}', [Espadas\PlanejamentoController::class, 'show'])->name('planejamento.show');
     Route::post('/planejamento/{id}', [Espadas\PlanejamentoController::class, 'update'])->name('planejamento.update');
@@ -82,7 +79,6 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
     });
 });
 
-Route::get('/api/setores', [SetorController::class, 'index'])->name('setores.index');
 
 Route::get('/usuarios/supabase', function () {
     return Inertia::render('Usuarios/SupabaseUsers', [
