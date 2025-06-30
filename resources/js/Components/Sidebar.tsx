@@ -7,7 +7,8 @@ import {
     Settings,
     LogOut,
     UserCog,
-    Building
+    Building,
+    ShoppingBag
 } from 'lucide-react';
 
 export const Sidebar = () => {
@@ -15,15 +16,16 @@ export const Sidebar = () => {
 
     return (
         <aside
-            className="h-screen w-56 bg-gradient-to-b from-[#CDA77A] to-[#CDA77A] shadow-lg flex flex-col text-white"
+            className="h-screen fixed w-56 bg-gradient-to-b from-[#CDA77A] to-[#CDA77A] shadow-lg flex flex-col text-white"
         >
-            <nav className="flex flex-col gap-y-2 mt-6 px-2 overflow-y-auto">
-                <SidebarLink href="/painel-pedidos" icon={<ClipboardList />} label="Painel de Pedidos" />
+            <nav className="flex overflow-y-auto flex-col gap-y-2 px-2 mt-4">
+                <SidebarLink href={route('dashboard')} icon={<ClipboardList />} label="Painel de Pedidos" />
+                <SidebarLink href="/produtos" icon={<ShoppingBag />} label="Gestão de Produtos" />
                 <SidebarLink href="/documentos" icon={<UserCog />} label="Ambiente do Funcionário" />
-                <SidebarLink href="/gestao-usuarios" icon={<Users />} label="Gestão de Usuários" />
+                <SidebarLink href="/usuarios/supabase" icon={<Users />} label="Gestão de Usuários" />
                 <SidebarLink href="/gestao-usuarios" icon={<Building />} label="Gestão de Funcionários" />
                 <SidebarLink href="/setores" icon={<Settings />} label="Gestão de Setores" />
-                
+
             </nav>
         </aside>
     );

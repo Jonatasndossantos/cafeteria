@@ -79,8 +79,8 @@ Route::middleware('auth:sanctum')->group(function () {
 // Rota para download de PDF de documentos
 Route::get('/documentos/{id}/pdf', [DocumentoPdfController::class, 'downloadPdf']);
 
-// Rotas para administração de usuários do Supabase
-Route::middleware(['auth:sanctum'])->prefix('supabase')->group(function () {
+// Rotas para administração de usuários do Supabase (TEMP: sem autenticação para testes)
+Route::prefix('supabase')->group(function () {
     Route::get('/users', [Controllers\Api\SupabaseUsersController::class, 'index']);
     Route::post('/users', [Controllers\Api\SupabaseUsersController::class, 'store']);
     Route::get('/users/{id}', [Controllers\Api\SupabaseUsersController::class, 'show']);

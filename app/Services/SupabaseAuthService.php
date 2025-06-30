@@ -18,9 +18,12 @@ class SupabaseAuthService
 
     protected function request()
     {
-        return Http::withToken($this->serviceKey)
-            ->acceptJson()
-            ->baseUrl("{$this->baseUrl}/auth/v1");
+        return Http::withHeaders([
+            'apikey' => $this->serviceKey,
+            'Authorization' => 'Bearer ' . $this->serviceKey
+        ])
+        ->acceptJson()
+        ->baseUrl("{$this->baseUrl}/auth/v1");
     }
 
     /**

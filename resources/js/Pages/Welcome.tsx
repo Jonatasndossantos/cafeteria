@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Head } from '@inertiajs/react';
 import { Menu, X, Instagram, Facebook, Youtube, Coffee, Users, Gift, ShoppingBag, Cake, BookOpen, Home } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 

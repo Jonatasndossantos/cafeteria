@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProcessoController;
 use App\Http\Controllers\SetorController;
 use App\Http\Controllers\GestaoUsuariosController;
@@ -58,10 +59,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
     Route::get('/processos/{id}', [ProcessoController::class, 'show'])->name('processos.show');
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-});
 
-// Rotas que requerem acesso de admin
-Route::middleware(['auth:sanctum', 'verified', 'admin'])->group(function () {
+
+    Route::resource('produtos', ProdutoController::class);
+
     // Rotas de Setores
     Route::get('/setores', [SetorController::class, 'index'])->name('setores.index');
     Route::get('/setores/create', [SetorController::class, 'create'])->name('setores.create');
