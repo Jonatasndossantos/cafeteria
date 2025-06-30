@@ -52,8 +52,8 @@ Route::middleware(['auth:sanctum','verified'])->group(function ()
     Route::get('/planejamento/{id}', [Espadas\PlanejamentoController::class, 'show'])->name('planejamento.show');
     Route::post('/planejamento/{id}', [Espadas\PlanejamentoController::class, 'update'])->name('planejamento.update');
 
-    Route::get('/processos/create', [ProcessoController::class, 'create'])->name('processos.create');
     Route::get('/processos', [ProcessoController::class, 'index'])->name('processos.index');
+    Route::get('/processos/create', [ProcessoController::class, 'create'])->name('processos.create');
     Route::post('/processos', [ProcessoController::class, 'store'])->name('processos.store');
     Route::get('/processos/{id}', [ProcessoController::class, 'show'])->name('processos.show');
 

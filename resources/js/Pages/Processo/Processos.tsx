@@ -1,22 +1,21 @@
 import React from 'react';
 import { router, Head } from '@inertiajs/react';
-import IdentificacaoBloco from '@/Components/espadaComponente1/tabs/planejamento/IdentificacaoBloco';
+import IdentificacaoBloco from '@/Components/IdentificacaoBloco';
 import { Button } from '@/Components/ui/button';
 import { Header } from '@/Components/Header';
-import { Footer } from '@/Components/Footer';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 
 const queryClient = new QueryClient();
 
 export default function Processos() {
-
     const handleBack = () => {
         router.visit('/ambienteservidor');
     };
 
     return (
-
+        <QueryClientProvider client={queryClient}>
             <div className="min-h-screen bg-gray-50">
                 <Header />
                 <main className="container px-4 py-8 mx-auto">
@@ -33,10 +32,10 @@ export default function Processos() {
                             <h1 className="text-2xl font-bold">Novo Processo</h1>
                         </div>
                         <IdentificacaoBloco />
-
                     </div>
                 </main>
-                <Footer />
+               
             </div>
+        </QueryClientProvider>
     );
 }

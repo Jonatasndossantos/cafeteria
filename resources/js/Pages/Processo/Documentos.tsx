@@ -7,6 +7,7 @@ import { Table } from 'lucide-react';
 // @ts-ignore
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { usePortalTransparencia } from '@/hooks/usePortalTransparencia';
+import { Link } from '@inertiajs/react';
 
 interface Setor {
   id: number;
@@ -98,6 +99,14 @@ const Documentos = ({ processos = [], setores = [] }: Props) => {
             </Tabs>
           </div>
         </main>
+        {/* Botão fixo inferior direito */}
+        <Link
+          href="/processos"
+          className="fixed bottom-6 right-6 z-50 px-6 py-4 rounded-full bg-[#D09290] text-white font-bold shadow-lg hover:bg-[#4E1F14] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D09290] focus:ring-offset-2"
+          aria-label="Nova Solicitação"
+        >
+          Nova Solicitação
+        </Link>
       </div>
     </AuthenticatedLayout>
   );

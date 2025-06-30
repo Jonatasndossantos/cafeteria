@@ -86,7 +86,7 @@ class ProcessoController extends Controller
 
             // \Log::info('ProcessoController@index - Processos encontrados:', ['count' => $processos->count()]);
 
-            return Inertia::render('Processo/Documentos', [
+            return Inertia::render('Processo/Processos', [
                 'processos' => $processos,
                 'auth' => [
                     'user' => auth()->user()
@@ -142,7 +142,7 @@ class ProcessoController extends Controller
 
     public function create()
     {
-        return Inertia::render('Espadas/Processos', [
+        return Inertia::render('Processo/Processos', [
             'auth' => [
                 'user' => auth()->user()
             ],

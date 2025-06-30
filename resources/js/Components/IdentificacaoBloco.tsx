@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
-import { SugestoesIAComponent } from "../dfd/SugestoesIAComponent";
+
 import { usePage, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
@@ -299,19 +299,7 @@ export default function IdentificacaoBloco() {
         <label htmlFor="descricao_necessidade" className="block mb-1 text-sm font-medium text-gray-700">
           Descrição da Necessidade *
         </label>
-        <SugestoesIAComponent
-          field="objeto"
-          value={formData.objeto}
-          onChange={(value) => setFormData(prev => ({ ...prev, objeto: value }))}
-          context={{
-            documentType: 'processo',
-            unidade: formData.secretaria
-          }}
-          rows={3}
-          fieldType="textarea"
-          placeholder="Descreva resumidamente a necessidade"
-          onSelectSuggestion={(suggestion) => setFormData(prev => ({ ...prev, objeto: suggestion }))}
-        />
+     
       </div>
 
       <div className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
