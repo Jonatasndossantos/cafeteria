@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Head } from '@inertiajs/react';
 
-import { Menu, X, Instagram, Facebook, Youtube, Coffee, Users, Gift, ShoppingBag, Cake, BookOpen, Home } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Youtube, Coffee, Users, Gift, ShoppingBag, Cake, BookOpen, Home, Leaf, Sandwich } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+
+interface NavLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
 import cafe from '@/Pages/media/cafe.jpg';
 import camomila from '@/Pages/media/camomila.jpg';
 import chescake from '@/Pages/media/chescake.jpg';
@@ -17,9 +22,8 @@ import interior2 from '@/Pages/media/interior2.jpeg';
 import interior3 from '@/Pages/media/interior3.jpeg';
 import interior4 from '@/Pages/media/interior4.jpeg';
 
-const NAV_LINKS = [
-  
-  { label: 'Login', href: '/login' },
+const NAV_LINKS: NavLink[] = [
+  { label: 'Login', href: '/login', external: false },
 ];
 
 const PRODUCT_CARDS = [

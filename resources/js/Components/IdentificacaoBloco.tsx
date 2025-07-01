@@ -11,6 +11,7 @@ import { usePage, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { StandardCard } from '@/Components/ui/standard-card';
+import axios from 'axios';
 
 interface Setor {
   id: number;
@@ -86,7 +87,8 @@ export default function IdentificacaoBloco() {
   const { data: setores = [] } = useQuery({
     queryKey: ['setores'],
     queryFn: async () => {
-      return props.setor;
+      const response = await axios.get('/api/setores-public');
+      return response.data;
     }
   });
 
@@ -104,6 +106,8 @@ export default function IdentificacaoBloco() {
     router.post('/processos', submitData, {
       onSuccess: () => {
         setIsSubmitting(false);
+        // Redirecionar para a página de documentos após salvar com sucesso
+        router.visit('/documentos');
       },
       onError: (errors) => {
         console.error('Erro ao salvar processo:', errors);
@@ -112,42 +116,20 @@ export default function IdentificacaoBloco() {
     });
   };
 
-  const modalidades = [
-    // 🔹 MODALIDADES TRADICIONAIS (Lei nº 14.133/2021 – Art. 28 e Art. 32)
-    'Pregão Eletrônico - Art. 28, inc. I',
-    'Pregão Presencial - Art. 28, inc. I',
-    'Concorrência - Art. 28, inc. II',
-    'Concurso - Art. 28, inc. III',
-    'Leilão - Art. 28, inc. IV',
-    'Diálogo Competitivo - Art. 28, inc. V',
-    // 🔹 INSTRUMENTOS DIRETOS
-    'Dispensa de Licitação - Art. 74 e Art. 75 da Lei 14.133/21',
-    'Inexigibilidade de Licitação - Art. 74 e Art. 74-A da Lei 14.133/21',
-    'Credenciamento',
-    'Adesão à Ata (Carona) - Art. 86 a 88 da Lei 14.133/21 (Sistema de Registro de Preços - SRP)',
-    // 🔹 TERCEIRO SETOR (Lei nº 13.019/2014 – MROSC)
-    'Chamamento Público - Art. 23 a 27 da Lei 13.019/14',
-    'Termo de Colaboração - Art. 16, inc. I da Lei 13.019/14',
-    'Termo de Fomento - Art. 16, inc. II da Lei 13.019/14'
-  ];
 
   const tipos = [
-    'Obras',
-    'Serviços Comuns',
-    'Serviços Especializados',
-    'Serviços de Engenharia',
-    'Tecnologia da Informação (TIC)',
-    'Locação de Bens',
-    'Aquisição de Bens Permanentes',
-    'Aquisição de Materiais de Consumo',
-    'Obras e Serviços de Engenharia',
-    'Parceria com OSC/Termo de Colaboração/Fomento',
-    'Consultoria Técnica/Estudo Especializado'
+    'Produtos de Consumo',
+    'Ingredientes Alimentares',
+    'Materiais de Limpeza e Higiene',
+    'Equipamentos e Utensílios',
+    'Serviços',
+    'Materiais Administrativos'
   ];
 
   // Debug: Log formData to console
   console.log('formData:', formData);
   console.log('tipos array:', tipos);
+  console.log('setores carregados:', setores);
 
   return (
     <StandardCard 
@@ -155,15 +137,11 @@ export default function IdentificacaoBloco() {
       icon={Eye}
       className="mb-6"
     >
-      {/* Debug: Test div to verify rendering */}
-      <div className="mb-4 p-2 bg-yellow-100 border border-yellow-400 rounded">
-        <p className="text-sm">Debug: Campo tipo está sendo renderizado. Valor atual: {formData.tipo || 'vazio'}</p>
-      </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
-            Código do Documento *
+            Código da Solicitação *
           </label>
           <div className="flex gap-2">
             <div className="px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-gray-600 min-w-[120px] flex items-center">
@@ -209,6 +187,41 @@ export default function IdentificacaoBloco() {
 
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
+            Valor *
+          </label>
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R$</span>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              className="w-full pl-10 pr-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+              placeholder="0,00"
+              value={formData.valor}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value) || 0;
+                setFormData(prev => ({ ...prev, valor: value }));
+              }}
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block mb-1 text-sm font-medium text-gray-700">
+            Data *
+          </label>
+          <input
+            type="date"
+            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+            value={formData.data}
+            onChange={(e) => setFormData(prev => ({ ...prev, data: e.target.value }))}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 text-sm font-medium text-gray-700">
             Modalidade
           </label>
           <Select
@@ -221,32 +234,14 @@ export default function IdentificacaoBloco() {
             <SelectContent>
               {/* Separador - Modalidades Tradicionais */}
               <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50 border-t border-b border-gray-100">
-                🔹 MODALIDADES TRADICIONAIS
+                🔹 MODALIDADES
               </div>
-              <SelectItem value="Pregão Eletrônico - Art. 28, inc. I">Pregão Eletrônico - Art. 28, inc. I</SelectItem>
-              <SelectItem value="Pregão Presencial - Art. 28, inc. I">Pregão Presencial - Art. 28, inc. I</SelectItem>
-              <SelectItem value="Concorrência - Art. 28, inc. II">Concorrência - Art. 28, inc. II</SelectItem>
-              <SelectItem value="Concurso - Art. 28, inc. III">Concurso - Art. 28, inc. III</SelectItem>
-              <SelectItem value="Leilão - Art. 28, inc. IV">Leilão - Art. 28, inc. IV</SelectItem>
-              <SelectItem value="Diálogo Competitivo - Art. 28, inc. V">Diálogo Competitivo - Art. 28, inc. V</SelectItem>
-              
-              {/* Separador - Instrumentos Diretos */}
-              <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50 border-t border-b border-gray-100">
-                🔹 INSTRUMENTOS DIRETOS
-              </div>
-              <SelectItem value="Dispensa de Licitação - Art. 74 e Art. 75 da Lei 14.133/21">Dispensa de Licitação - Art. 74 e Art. 75 da Lei 14.133/21</SelectItem>
-              <SelectItem value="Inexigibilidade de Licitação - Art. 74 e Art. 74-A da Lei 14.133/21">Inexigibilidade de Licitação - Art. 74 e Art. 74-A da Lei 14.133/21</SelectItem>
-              <SelectItem value="Credenciamento">Credenciamento</SelectItem>
-              <SelectItem value="Adesão à Ata (Carona) - Art. 86 a 88 da Lei 14.133/21 (Sistema de Registro de Preços - SRP)">Adesão à Ata (Carona) - Art. 86 a 88 da Lei 14.133/21 (Sistema de Registro de Preços - SRP)</SelectItem>
-              
-              {/* Separador - Terceiro Setor */}
-              <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50 border-t border-b border-gray-100">
-                🔹 TERCEIRO SETOR (MROSC)
-              </div>
-              <SelectItem value="Chamamento Público - Art. 23 a 27 da Lei 13.019/14">Chamamento Público - Art. 23 a 27 da Lei 13.019/14</SelectItem>
-              <SelectItem value="Termo de Colaboração - Art. 16, inc. I da Lei 13.019/14">Termo de Colaboração - Art. 16, inc. I da Lei 13.019/14</SelectItem>
-              <SelectItem value="Termo de Fomento - Art. 16, inc. II da Lei 13.019/14">Termo de Fomento - Art. 16, inc. II da Lei 13.019/14</SelectItem>
-            </SelectContent>
+              <SelectItem value="Compra Direta">Compra Direta</SelectItem>
+              <SelectItem value="Cotação com Fornecedores (Orçamento)">Cotação com Fornecedores (Orçamento)</SelectItem>
+              <SelectItem value="Contrato com Fornecedor Fixo">Contrato com Fornecedor Fixo</SelectItem>
+              <SelectItem value="Requisição Emergencial">Requisição Emergencial</SelectItem>
+              <SelectItem value="Compra Programada">Compra Programada</SelectItem>
+              </SelectContent>
           </Select>
         </div>
 
@@ -299,41 +294,18 @@ export default function IdentificacaoBloco() {
         <label htmlFor="descricao_necessidade" className="block mb-1 text-sm font-medium text-gray-700">
           Descrição da Necessidade *
         </label>
-     
+        <textarea
+          id="descricao_necessidade"
+          className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+          rows={4}
+          placeholder="Descreva detalhadamente a necessidade..."
+          value={formData.objeto}
+          onChange={(e) => setFormData(prev => ({ ...prev, objeto: e.target.value }))}
+          required
+        />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Status do Planejamento *
-          </label>
-          <Select
-            value={formData.statusPlanejamento}
-            onValueChange={(value) => setFormData(prev => ({ ...prev, statusPlanejamento: value }))}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecione o status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="em_discussao">Em Discussão</SelectItem>
-              <SelectItem value="consolidada_dfd">Consolidada para DFD</SelectItem>
-              <SelectItem value="arquivada">Arquivada</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Data de Início
-          </label>
-          <input
-            type="date"
-            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
-            value={formData.dataInicio}
-            onChange={(e) => setFormData(prev => ({ ...prev, dataInicio: e.target.value }))}
-          />
-        </div>
-      </div>
+  
 
       <div className="flex justify-end mt-6">
         <button

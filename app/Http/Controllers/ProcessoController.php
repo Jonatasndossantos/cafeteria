@@ -41,6 +41,7 @@ class ProcessoController extends Controller
                 'usuario_id' => Auth::id(),
                 'tipo' => $validated['tipo'],
                 'status' => $validated['status'],
+                'valor' => $validated['valor'],
                 'tags' => $validated['tags'] ?? [],
                 'autenticidade' => $validated['autenticidade'] ?? [
                     'nivel' => 'Pendente',
@@ -55,7 +56,7 @@ class ProcessoController extends Controller
 
             $processo = $processo->load('setor', 'usuario');
 
-            return Inertia::render('Espadas/Processos/Show', [
+            return Inertia::render('Processo/Processos/Show', [
                 'processo' => $processo,
                 'arquivos' => $arquivos,
                 'auth' => [
@@ -129,7 +130,7 @@ class ProcessoController extends Controller
         $processo = $processo->load('usuario');
 
         // dd($processo);
-        return Inertia::render('Espadas/Processos/Show', [
+        return Inertia::render('Processo/Processos/Show', [
             'processo' => $processo,
             'arquivos' => $arquivos,
             'arquivosAtual' => $arquivosAtual,

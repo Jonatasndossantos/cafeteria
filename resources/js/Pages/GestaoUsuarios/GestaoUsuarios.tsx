@@ -221,7 +221,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
             <TabsContent value="usuarios" className="space-y-6">
               <Card className="shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-xl text-[#4E1F14]">Cadastrar novo servidor</CardTitle>
+                  <CardTitle className="text-xl text-[#4E1F14]">Cadastrar novo funcionário</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
@@ -381,7 +381,7 @@ const GestaoUsuarios: React.FC<Props> = ({ setores = [], usuarios = [] }) => {
                       </div>
                     <Button
                       type="submit"
-                      className="mt-6 bg-[#4E1F14] hover:bg-[#4E1F14]/90 px-8"
+                      className="mt-6 bg-[#4E1F14] text-white hover:bg-[#4E1F14]/90 px-8"
                       disabled={processing}
                     >
                       {processing ? 'Cadastrando...' : 'Cadastrar Servidor'}

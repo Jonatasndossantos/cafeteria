@@ -47,8 +47,8 @@ interface Props {
 
 const Documentos = ({ processos = [], setores = [] }: Props) => {
 
-  console.log('Processos recebidos no componente:', processos);
-  console.log('Setores recebidos no componente:', setores);
+  //console.log('Processos recebidos no componente:', processos);
+  //console.log('Setores recebidos no componente:', setores);
 
   const [visualizacao, setVisualizacao] = useState<VisualizacaoTipo>('Tabela');
 
