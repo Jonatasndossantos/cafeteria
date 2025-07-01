@@ -16,6 +16,23 @@ class OrderController extends Controller
     }
 
     /**
+     * Show the form for creating a new order.
+     */
+    public function create()
+    {
+        return Inertia::render('Orders/CreateOrder');
+    }
+
+    /**
+     * Store a newly created order in storage.
+     */
+    public function store(Request $request)
+    {
+        // Implementar quando necessário - integração com Supabase
+        return response()->json(['message' => 'Order created successfully']);
+    }
+
+    /**
      * Display the specified order.
      */
     public function show(string $id)
