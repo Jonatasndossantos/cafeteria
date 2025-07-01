@@ -32,6 +32,15 @@ Route::get('/setores-public', function () {
     return response()->json(Setor::all());
 });
 
+// Rota de teste para verificar autenticação
+Route::middleware('auth:sanctum')->get('/test-auth', function (Request $request) {
+    return response()->json([
+        'authenticated' => true,
+        'user' => $request->user(),
+        'message' => 'Usuário autenticado com sucesso'
+    ]);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -73,10 +82,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // Processos routes
     Route::post('/processos', [ProcessoController::class, 'store']);
     Route::get('/processos', [ProcessoController::class, 'index']);
+    Route::delete('/processos/{id}', [ProcessoController::class, 'destroy']);
+    Route::post('/processos/{id}/delete', [ProcessoController::class, 'destroy']); // Rota alternativa para DELETE
+    
+    // Rota para download de PDF de documentos
+    Route::get('/documentos/{id}/pdf', [DocumentoPdfController::class, 'downloadPdf']);
 });
-
-// Rota para download de PDF de documentos
-Route::get('/documentos/{id}/pdf', [DocumentoPdfController::class, 'downloadPdf']);
 
 // Rotas para administração de usuários do Supabase (TEMP: sem autenticação para testes)
 Route::prefix('supabase')->group(function () {

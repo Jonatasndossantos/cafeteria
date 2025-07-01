@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { configureAxiosAuth } from './lib/auth';
 
 // Configuração base do axios
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -11,11 +10,9 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000';
 // Configurar o token CSRF
 const token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.getAttribute('content');
+    const csrfToken = token.getAttribute('content');
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 }
-
-// Configurar autenticação inicial
-configureAxiosAuth(axios);
 
 // Interceptor para tratamento de erros
 axios.interceptors.response.use(
@@ -33,15 +30,10 @@ axios.interceptors.response.use(
 );
 
 // Configurar o interceptor de requisição para garantir que os cookies sejam enviados
-// e que o token de autenticação seja incluído
 axios.interceptors.request.use(
     config => {
-        // Garantir que withCredentials está true
+        // Garantir que withCredentials está true para enviar cookies de sessão
         config.withCredentials = true;
-
-        // Configurar autenticação antes de cada requisição
-        configureAxiosAuth(axios);
-
         return config;
     },
     error => {

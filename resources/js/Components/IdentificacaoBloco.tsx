@@ -35,22 +35,32 @@ interface User {
 
 interface PageProps {
   auth: {
-    nome: string;
-    cargo: string;
-    setor: {
+    user: {
       id: number;
       nome: string;
-      sigla: string;
+      cargo: string;
+      cpf: string;
+      matricula: string;
+      email: string;
+      celular?: string;
+      setor?: {
+        id: number;
+        nome: string;
+        sigla: string;
+      };
     };
-    [key: string]: any;
   };
   [key: string]: any;
 }
 
 export default function IdentificacaoBloco() {
-  const { props } = usePage<PageProps>();
+  const { props } = usePage<any>();
   const currentYear = new Date().getFullYear();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Debug: Log authentication data
+  console.log('Auth props:', props.auth);
+  console.log('User data:', props.auth?.user);
 
   const idSetor = props.auth?.user?.setor?.id;
   

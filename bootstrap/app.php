@@ -17,9 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
+        
+        // Adicionar middleware para permitir autenticação via sessão nas rotas da API
+        $middleware->api(prepend: [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        ]);
     })
     ->withProviders([
         AppServiceProvider::class,
+        \Barryvdh\DomPDF\ServiceProvider::class,
     ])
     ->withExceptions(function (Exceptions $exceptions) {
         //

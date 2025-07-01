@@ -31,8 +31,8 @@ class ProcessosArquivosSeeder extends Seeder
         // Modalidades de processo
         $modalidades = ['Pregão Eletrônico', 'Pregão Presencial', 'Concorrência', 'Dispensa', 'Inexigibilidade'];
 
-        // Tipos de processo
-        $tiposProcesso = ['Pregão Eletrônico', 'Pregão Presencial', 'Concorrência', 'Dispensa', 'Inexigibilidade'];
+        // Tipos de processo (cafeteria-specific)
+        $tiposProcesso = ['Produtos de Consumo', 'Ingredientes Alimentares', 'Materiais de Limpeza e Higiene', 'Equipamentos e Utensílios', 'Serviços', 'Materiais Administrativos'];
 
         // Status possíveis
         // $statusList = ['em andamento', 'pendente', 'concluido', 'cancelado'];
