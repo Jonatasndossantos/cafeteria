@@ -19,7 +19,7 @@ export const Sidebar = () => {
             className="h-screen fixed w-56 bg-gradient-to-b from-[#CDA77A] to-[#CDA77A] shadow-lg flex flex-col text-white"
         >
             <nav className="flex overflow-y-auto flex-col gap-y-2 px-2 mt-4">
-                <SidebarLink href={route('dashboard')} icon={<ClipboardList />} label="Painel de Pedidos" />
+                <SidebarLink href="/orders" icon={<ClipboardList />} label="Painel de Pedidos" />
                 <SidebarLink href="/produtos" icon={<ShoppingBag />} label="Gestão de Produtos" />
                 <SidebarLink href="/documentos" icon={<UserCog />} label="Ambiente do Funcionário" />
                 <SidebarLink href="/usuarios/supabase" icon={<Users />} label="Gestão de Usuários" />
