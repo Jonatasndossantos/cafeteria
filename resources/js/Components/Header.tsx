@@ -51,7 +51,7 @@ export const Header = () => {
 //   console.log(usuario);
 
 return (
-    <header className="bg-gradient-to-r from-[#CDA77A] to-[#4E1F14] text-white">
+    <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-[#CDA77A] to-[#4E1F14] text-white z-50">
       <div className="px-20 mx-auto">
         <div className="flex justify-between items-center py-4">
           <div className="flex gap-x-6 items-center">

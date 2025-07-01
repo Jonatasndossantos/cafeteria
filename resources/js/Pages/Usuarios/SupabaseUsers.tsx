@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 // Layout temporário simples
-import { useSupabaseUsers } from '@/App/hooks/useSupabaseUsers';
-import { SupabaseUser } from '@/App/types/supabase';
+import { useSupabaseUsers } from '../../hooks/useSupabaseUsers';
+import { SupabaseUser } from '../../types/supabase';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
@@ -245,367 +245,365 @@ const SupabaseUsers = ({ auth }: PageProps) => {
 
   return (
     <AuthenticatedLayout>
+      <div className="min-h-screen bg-gray-100">
+        <Head title="Administração de Usuários Supabase" />
 
+        <div className="py-12">
+          <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-900">
+                      Administração de Usuários Supabase
+                    </h1>
+                    <p className="text-gray-600">
+                      Gerencie usuários autenticados via Supabase Auth
+                    </p>
+                  </div>
 
-    <div className="min-h-screen bg-gray-100">
-      <Head title="Administração de Usuários Supabase" />
+                  <div className="flex gap-3 items-center">
+                    <Button
+                      onClick={handleFetchUsers}
+                      variant="outline"
+                      size="sm"
+                      disabled={loading}
+                    >
+                      <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                      Atualizar
+                    </Button>
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900">
-                    Administração de Usuários Supabase
-                  </h1>
-                  <p className="text-gray-600">
-                    Gerencie usuários autenticados via Supabase Auth
-                  </p>
-                </div>
-
-                <div className="flex gap-3 items-center">
-                  <Button
-                    onClick={handleFetchUsers}
-                    variant="outline"
-                    size="sm"
-                    disabled={loading}
-                  >
-                    <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-                    Atualizar
-                  </Button>
-
-                  <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button size="sm">
-                        <UserPlus className="mr-2 w-4 h-4" />
-                        Criar Usuário
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[525px]">
-                      <DialogHeader>
-                        <DialogTitle>Criar Novo Usuário</DialogTitle>
-                        <DialogDescription>
-                          Adicione um novo usuário ao Supabase Auth.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="grid gap-4 py-4">
-                        <div className="grid gap-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            value={newUserData.email}
-                            onChange={(e) => setNewUserData(prev => ({ ...prev, email: e.target.value }))}
-                            placeholder="usuario@exemplo.com"
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="password">Senha (opcional)</Label>
-                          <Input
-                            id="password"
-                            type="password"
-                            value={newUserData.password}
-                            onChange={(e) => setNewUserData(prev => ({ ...prev, password: e.target.value }))}
-                            placeholder="Deixe vazio para gerar automaticamente"
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="user_metadata">User Metadata (JSON)</Label>
-                          <Textarea
-                            id="user_metadata"
-                            value={newUserData.user_metadata}
-                            onChange={(e) => setNewUserData(prev => ({ ...prev, user_metadata: e.target.value }))}
-                            placeholder='{"name": "Nome do Usuário"}'
-                            rows={3}
-                          />
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Switch
-                            id="email_confirm"
-                            checked={newUserData.email_confirm}
-                            onCheckedChange={(checked) => setNewUserData(prev => ({ ...prev, email_confirm: checked }))}
-                          />
-                          <Label htmlFor="email_confirm">Confirmar email automaticamente</Label>
-                        </div>
-                      </div>
-                      <DialogFooter>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setCreateDialogOpen(false)}
-                        >
-                          Cancelar
-                        </Button>
-                        <Button onClick={handleCreateUser} disabled={!newUserData.email || loading}>
+                    <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button size="sm">
+                          <UserPlus className="mr-2 w-4 h-4" />
                           Criar Usuário
                         </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-
-              {/* Barra de pesquisa */}
-              <div className="flex gap-3 items-center mb-6">
-                <div className="flex-1 max-w-sm">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
-                    <Input
-                      type="text"
-                      placeholder="Buscar por email..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                      className="pl-10"
-                    />
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[525px]">
+                        <DialogHeader>
+                          <DialogTitle>Criar Novo Usuário</DialogTitle>
+                          <DialogDescription>
+                            Adicione um novo usuário ao Supabase Auth.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="grid gap-2">
+                            <Label htmlFor="email">Email *</Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              value={newUserData.email}
+                              onChange={(e) => setNewUserData(prev => ({ ...prev, email: e.target.value }))}
+                              placeholder="usuario@exemplo.com"
+                            />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="password">Senha (opcional)</Label>
+                            <Input
+                              id="password"
+                              type="password"
+                              value={newUserData.password}
+                              onChange={(e) => setNewUserData(prev => ({ ...prev, password: e.target.value }))}
+                              placeholder="Deixe vazio para gerar automaticamente"
+                            />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="user_metadata">User Metadata (JSON)</Label>
+                            <Textarea
+                              id="user_metadata"
+                              value={newUserData.user_metadata}
+                              onChange={(e) => setNewUserData(prev => ({ ...prev, user_metadata: e.target.value }))}
+                              placeholder='{"name": "Nome do Usuário"}'
+                              rows={3}
+                            />
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Switch
+                              id="email_confirm"
+                              checked={newUserData.email_confirm}
+                              onCheckedChange={(checked) => setNewUserData(prev => ({ ...prev, email_confirm: checked }))}
+                            />
+                            <Label htmlFor="email_confirm">Confirmar email automaticamente</Label>
+                          </div>
+                        </div>
+                        <DialogFooter>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setCreateDialogOpen(false)}
+                          >
+                            Cancelar
+                          </Button>
+                          <Button onClick={handleCreateUser} disabled={!newUserData.email || loading}>
+                            Criar Usuário
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
-                <Button onClick={handleSearch} disabled={loading}>
-                  Buscar
-                </Button>
-              </div>
 
-              {/* Estatísticas */}
-              <div className="grid grid-cols-1 gap-4 mb-6 md:grid-cols-3">
-                <Card>
-                  <CardHeader className="flex flex-row justify-between items-center pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">Total de Usuários</CardTitle>
-                    <UserCheck className="w-4 h-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{total}</div>
-                  </CardContent>
-                </Card>
+                {/* Barra de pesquisa */}
+                <div className="flex gap-3 items-center mb-6">
+                  <div className="flex-1 max-w-sm">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
+                      <Input
+                        type="text"
+                        placeholder="Buscar por email..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                        className="pl-10"
+                      />
+                    </div>
+                  </div>
+                  <Button onClick={handleSearch} disabled={loading}>
+                    Buscar
+                  </Button>
+                </div>
 
-                <Card>
-                  <CardHeader className="flex flex-row justify-between items-center pb-2 space-y-0">
-                    <CardTitle className="text-sm font-medium">Emails Confirmados</CardTitle>
-                    <ShieldCheck className="w-4 h-4 text-muted-foreground" />
-                  </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">
-                        {users.filter(u => isEmailConfirmed(u)).length}
-                        </div>
-                    </CardContent>
-                    </Card>
-
-                    <Card>
+                {/* Estatísticas */}
+                <div className="grid grid-cols-1 gap-4 mb-6 md:grid-cols-3">
+                  <Card>
                     <CardHeader className="flex flex-row justify-between items-center pb-2 space-y-0">
-                        <CardTitle className="text-sm font-medium">Emails Pendentes</CardTitle>
-                        <Mail className="w-4 h-4 text-muted-foreground" />
+                      <CardTitle className="text-sm font-medium">Total de Usuários</CardTitle>
+                      <UserCheck className="w-4 h-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">
-                        {users.filter(u => !isEmailConfirmed(u)).length}
-                        </div>
+                      <div className="text-2xl font-bold">{total}</div>
                     </CardContent>
-                    </Card>
+                  </Card>
+
+                  <Card>
+                    <CardHeader className="flex flex-row justify-between items-center pb-2 space-y-0">
+                      <CardTitle className="text-sm font-medium">Emails Confirmados</CardTitle>
+                      <ShieldCheck className="w-4 h-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">
+                        {users.filter(u => isEmailConfirmed(u)).length}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader className="flex flex-row justify-between items-center pb-2 space-y-0">
+                      <CardTitle className="text-sm font-medium">Emails Pendentes</CardTitle>
+                      <Mail className="w-4 h-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">
+                        {users.filter(u => !isEmailConfirmed(u)).length}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
 
                 {/* Mensagem de erro */}
                 {error && (
-                    <div className="p-4 mb-6 bg-red-50 rounded-md border border-red-200">
+                  <div className="p-4 mb-6 bg-red-50 rounded-md border border-red-200">
                     <div className="flex">
-                        <div className="text-red-800">
+                      <div className="text-red-800">
                         <strong>Erro:</strong> {error}
-                        </div>
+                      </div>
                     </div>
-                    </div>
+                  </div>
                 )}
 
                 {/* Lista de usuários */}
                 {loading ? (
-                    <div className="flex justify-center items-center py-12">
+                  <div className="flex justify-center items-center py-12">
                     <RefreshCw className="w-8 h-8 text-gray-500 animate-spin" />
                     <span className="ml-2 text-gray-600">Carregando usuários...</span>
-                    </div>
+                  </div>
                 ) : (
-                    <div className="space-y-4">
+                  <div className="space-y-4">
                     {users.map((user) => (
-                        <Card key={user.id} className="transition-shadow hover:shadow-md">
+                      <Card key={user.id} className="transition-shadow hover:shadow-md">
                         <CardContent className="p-6">
-                            <div className="flex justify-between items-center">
+                          <div className="flex justify-between items-center">
                             <div className="flex-1">
-                                <div className="flex gap-3 items-center mb-2">
+                              <div className="flex gap-3 items-center mb-2">
                                 <h3 className="text-lg font-medium">{user.email || 'Email não definido'}</h3>
                                 <div className="flex gap-2">
-                                    {isEmailConfirmed(user) ? (
+                                  {isEmailConfirmed(user) ? (
                                     <Badge variant="secondary" className="text-green-800 bg-green-100">
-                                        <ShieldCheck className="mr-1 w-3 h-3" />
-                                        Confirmado
+                                      <ShieldCheck className="mr-1 w-3 h-3" />
+                                      Confirmado
                                     </Badge>
-                                    ) : (
+                                  ) : (
                                     <Badge variant="destructive">
-                                        <Shield className="mr-1 w-3 h-3" />
-                                        Pendente
+                                      <Shield className="mr-1 w-3 h-3" />
+                                      Pendente
                                     </Badge>
-                                    )}
-                                    {user.role && (
+                                  )}
+                                  {user.role && (
                                     <Badge variant="outline">{user.role}</Badge>
-                                    )}
+                                  )}
                                 </div>
-                                </div>
+                              </div>
 
-                                <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 md:grid-cols-4">
+                              <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 md:grid-cols-4">
                                 <div>
-                                    <span className="font-medium">ID:</span> {user.id.slice(0, 8)}...
-                                </div>
-                                <div>
-                                    <span className="font-medium">Criado:</span> {formatDate(user.created_at)}
+                                  <span className="font-medium">ID:</span> {user.id.slice(0, 8)}...
                                 </div>
                                 <div>
-                                    <span className="font-medium">Último login:</span> {formatDate(user.last_sign_in_at)}
+                                  <span className="font-medium">Criado:</span> {formatDate(user.created_at)}
                                 </div>
                                 <div>
-                                    <span className="font-medium">Providers:</span> {user.app_metadata?.providers?.join(', ') || 'N/A'}
+                                  <span className="font-medium">Último login:</span> {formatDate(user.last_sign_in_at)}
                                 </div>
+                                <div>
+                                  <span className="font-medium">Providers:</span> {user.app_metadata?.providers?.join(', ') || 'N/A'}
                                 </div>
+                              </div>
                             </div>
 
                             <div className="flex gap-2 items-center ml-4">
-                                <Button
+                              <Button
                                 size="sm"
                                 variant="outline"
                                 onClick={() => openEditDialog(user)}
-                                >
+                              >
                                 Editar
-                                </Button>
+                              </Button>
 
-                                {!isEmailConfirmed(user) && (
+                              {!isEmailConfirmed(user) && (
                                 <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => handleConfirmEmail(user.id)}
-                                    disabled={loading}
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleConfirmEmail(user.id)}
+                                  disabled={loading}
                                 >
-                                    <Mail className="mr-1 w-4 h-4" />
-                                    Confirmar
+                                  <Mail className="mr-1 w-4 h-4" />
+                                  Confirmar
                                 </Button>
-                                )}
+                              )}
 
-                                <Button
+                              <Button
                                 size="sm"
                                 variant="outline"
                                 onClick={() => handleBanUser(user.id)}
                                 disabled={loading}
-                                >
+                              >
                                 <Ban className="mr-1 w-4 h-4" />
                                 Banir
-                                </Button>
+                              </Button>
 
-                                <AlertDialog>
+                              <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <Button size="sm" variant="destructive">
+                                  <Button size="sm" variant="destructive">
                                     <Trash2 className="mr-1 w-4 h-4" />
                                     Deletar
-                                    </Button>
+                                  </Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
-                                    <AlertDialogHeader>
+                                  <AlertDialogHeader>
                                     <AlertDialogTitle>Confirmar exclusão</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        Tem certeza que deseja deletar o usuário <strong>{user.email}</strong>?
-                                        Esta ação não pode ser desfeita.
+                                      Tem certeza que deseja deletar o usuário <strong>{user.email}</strong>?
+                                      Esta ação não pode ser desfeita.
                                     </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
                                     <AlertDialogCancel>Cancelar</AlertDialogCancel>
                                     <AlertDialogAction
-                                        onClick={() => handleDeleteUser(user.id)}
-                                        className="bg-red-600 hover:bg-red-700"
+                                      onClick={() => handleDeleteUser(user.id)}
+                                      className="bg-red-600 hover:bg-red-700"
                                     >
-                                        Deletar
+                                      Deletar
                                     </AlertDialogAction>
-                                    </AlertDialogFooter>
+                                  </AlertDialogFooter>
                                 </AlertDialogContent>
-                                </AlertDialog>
+                              </AlertDialog>
                             </div>
-                            </div>
+                          </div>
                         </CardContent>
-                        </Card>
+                      </Card>
                     ))}
 
                     {users.length === 0 && !loading && (
-                        <div className="py-12 text-center">
+                      <div className="py-12 text-center">
                         <UserCheck className="mx-auto mb-4 w-12 h-12 text-gray-400" />
                         <h3 className="mb-2 text-lg font-medium text-gray-900">
-                            Nenhum usuário encontrado
+                          Nenhum usuário encontrado
                         </h3>
                         <p className="text-gray-600">
-                            {searchTerm ? 'Tente uma busca diferente.' : 'Comece criando um novo usuário.'}
+                          {searchTerm ? 'Tente uma busca diferente.' : 'Comece criando um novo usuário.'}
                         </p>
-                        </div>
+                      </div>
                     )}
-                    </div>
+                  </div>
                 )}
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
 
         {/* Dialog de edição */}
         <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-            <DialogContent className="sm:max-w-[525px]">
+          <DialogContent className="sm:max-w-[525px]">
             <DialogHeader>
-                <DialogTitle>Editar Usuário</DialogTitle>
-                <DialogDescription>
+              <DialogTitle>Editar Usuário</DialogTitle>
+              <DialogDescription>
                 Atualize as informações do usuário {selectedUser?.email}.
-                </DialogDescription>
+              </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-                <div className="grid gap-2">
+              <div className="grid gap-2">
                 <Label htmlFor="edit_email">Email</Label>
                 <Input
-                    id="edit_email"
-                    type="email"
-                    value={editUserData.email}
-                    onChange={(e) => setEditUserData(prev => ({ ...prev, email: e.target.value }))}
+                  id="edit_email"
+                  type="email"
+                  value={editUserData.email}
+                  onChange={(e) => setEditUserData(prev => ({ ...prev, email: e.target.value }))}
                 />
-                </div>
-                <div className="grid gap-2">
+              </div>
+              <div className="grid gap-2">
                 <Label htmlFor="edit_password">Nova Senha (opcional)</Label>
                 <Input
-                    id="edit_password"
-                    type="password"
-                    value={editUserData.password}
-                    onChange={(e) => setEditUserData(prev => ({ ...prev, password: e.target.value }))}
-                    placeholder="Deixe vazio para manter a atual"
+                  id="edit_password"
+                  type="password"
+                  value={editUserData.password}
+                  onChange={(e) => setEditUserData(prev => ({ ...prev, password: e.target.value }))}
+                  placeholder="Deixe vazio para manter a atual"
                 />
-                </div>
-                <div className="grid gap-2">
+              </div>
+              <div className="grid gap-2">
                 <Label htmlFor="edit_user_metadata">User Metadata (JSON)</Label>
                 <Textarea
-                    id="edit_user_metadata"
-                    value={editUserData.user_metadata}
-                    onChange={(e) => setEditUserData(prev => ({ ...prev, user_metadata: e.target.value }))}
-                    rows={3}
+                  id="edit_user_metadata"
+                  value={editUserData.user_metadata}
+                  onChange={(e) => setEditUserData(prev => ({ ...prev, user_metadata: e.target.value }))}
+                  rows={3}
                 />
-                </div>
-                <div className="flex items-center space-x-2">
+              </div>
+              <div className="flex items-center space-x-2">
                 <Switch
-                    id="edit_email_confirm"
-                    checked={editUserData.email_confirm}
-                    onCheckedChange={(checked) => setEditUserData(prev => ({ ...prev, email_confirm: checked }))}
+                  id="edit_email_confirm"
+                  checked={editUserData.email_confirm}
+                  onCheckedChange={(checked) => setEditUserData(prev => ({ ...prev, email_confirm: checked }))}
                 />
                 <Label htmlFor="edit_email_confirm">Email confirmado</Label>
-                </div>
+              </div>
             </div>
             <DialogFooter>
-                <Button
+              <Button
                 type="button"
                 variant="outline"
                 onClick={() => setEditDialogOpen(false)}
-                >
+              >
                 Cancelar
-                </Button>
-                <Button onClick={handleEditUser} disabled={loading}>
+              </Button>
+              <Button onClick={handleEditUser} disabled={loading}>
                 Salvar Alterações
-                </Button>
+              </Button>
             </DialogFooter>
-            </DialogContent>
+          </DialogContent>
         </Dialog>
-        </div>
+      </div>
     </AuthenticatedLayout>
   );
 };

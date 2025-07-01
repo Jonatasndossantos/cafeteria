@@ -50,7 +50,6 @@ Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update']);
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy']);
 
 // Setores routes
-Route::apiResource('setores', SetorController::class);
 Route::get('setores/{id}/usuarios', [SetorController::class, 'usuarios']);
 
 // Rota para sugestões
@@ -66,7 +65,7 @@ Route::get('/teste', Controllers\TesteController::class);
 
 // Rotas que mandam dados do usuario (web)     ops(isso foi configurado no sanctum)
     // Documentos
-Route::middleware(['auth:sanctum', 'web'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('documents', DocumentController::class);
 });
 
@@ -79,8 +78,8 @@ Route::middleware('auth:sanctum')->group(function () {
 // Rota para download de PDF de documentos
 Route::get('/documentos/{id}/pdf', [DocumentoPdfController::class, 'downloadPdf']);
 
-// Rotas para administração de usuários do Supabase
-Route::middleware(['auth:sanctum'])->prefix('supabase')->group(function () {
+// Rotas para administração de usuários do Supabase (TEMP: sem autenticação para testes)
+Route::prefix('supabase')->group(function () {
     Route::get('/users', [Controllers\Api\SupabaseUsersController::class, 'index']);
     Route::post('/users', [Controllers\Api\SupabaseUsersController::class, 'store']);
     Route::get('/users/{id}', [Controllers\Api\SupabaseUsersController::class, 'show']);

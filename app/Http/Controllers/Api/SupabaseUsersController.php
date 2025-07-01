@@ -7,6 +7,7 @@ use App\Services\SupabaseAuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class SupabaseUsersController extends Controller
 {
@@ -22,14 +23,31 @@ class SupabaseUsersController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        // Debug: verificar configuração
+        Log::info('=== DEBUG SUPABASE API ===');
+        Log::info('Supabase URL: ' . config('services.supabase.url'));
+        Log::info('Service Role exists: ' . (!empty(config('services.supabase.service_role')) ? 'Yes' : 'No'));
+        Log::info('Service Role length: ' . strlen(config('services.supabase.service_role')));
+
         $limit = $request->get('limit', 50);
         $page = $request->get('page', 1);
         $search = $request->get('search');
+
+        Log::info("Request params - limit: {$limit}, page: {$page}, search: " . ($search ?? 'null'));
 
         if ($search) {
             $result = $this->supabaseAuth->searchUsersByEmail($search);
         } else {
             $result = $this->supabaseAuth->listUsers($limit, $page);
+        }
+
+        // Debug: verificar resultado
+        Log::info('Supabase result success: ' . ($result['success'] ? 'Yes' : 'No'));
+        if (!$result['success']) {
+            Log::error('Supabase error: ' . ($result['error'] ?? 'Unknown error'));
+            Log::error('Supabase message: ' . ($result['message'] ?? 'No message'));
+        } else {
+            Log::info('Supabase users count: ' . count($result['data']['users'] ?? []));
         }
 
         if (!$result['success']) {

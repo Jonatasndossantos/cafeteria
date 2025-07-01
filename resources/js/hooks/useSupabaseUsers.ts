@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
+import { configureAxiosAuth } from '../lib/auth';
 import {
   SupabaseUser,
   SupabaseUsersResponse,
@@ -44,6 +45,9 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      // Configura autenticação antes de cada requisição
+      configureAxiosAuth(axios);
+
       const response = await axios.get('/api/supabase/users', { params });
 
       if (response.data.users) {
@@ -68,6 +72,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.post('/api/supabase/users', userData);
       const newUser = response.data;
 
@@ -89,6 +94,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.put(`/api/supabase/users/${id}`, userData);
       const updatedUser = response.data;
 
@@ -109,6 +115,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       await axios.delete(`/api/supabase/users/${id}`);
 
       // Remove da lista local
@@ -129,6 +136,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.post(`/api/supabase/users/${id}/ban`, { duration });
       const updatedUser = response.data.data;
 
@@ -151,6 +159,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.post(`/api/supabase/users/${id}/unban`);
       const updatedUser = response.data.data;
 
@@ -173,6 +182,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.post(`/api/supabase/users/${id}/confirm-email`);
       const updatedUser = response.data.data;
 
@@ -195,6 +205,7 @@ export const useSupabaseUsers = (): UseSupabaseUsersReturn => {
     setError(null);
 
     try {
+      configureAxiosAuth(axios);
       const response = await axios.get(`/api/supabase/users/${id}`);
       return response.data;
     } catch (err) {
