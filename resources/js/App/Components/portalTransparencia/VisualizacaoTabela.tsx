@@ -20,19 +20,7 @@ export const VisualizacaoTabela = ({
   
   //console.log('Documentos recebidos na tabela:', documentos); // Debug log
   
-  const getIconeAutenticidade = (nivel: string) => {
-    switch (nivel) {
-      case 'Válida':
-        return <CheckCircle className="w-4 h-4 text-green-600" />;
-      case 'Parcial':
-        return <Lock className="w-4 h-4 text-yellow-600" />;
-      case 'Pendente':
-      case 'Inválida':
-        return <AlertTriangle className="w-4 h-4 text-red-600" />;
-      default:
-        return <AlertTriangle className="w-4 h-4 text-gray-400" />;
-    }
-  };
+
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -107,11 +95,11 @@ export const VisualizacaoTabela = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Processo/Documento</TableHead>
+            <TableHead>Solicitaçãp</TableHead>
             <TableHead>Tipo</TableHead>
             <TableHead>Data</TableHead>
             <TableHead>Objeto</TableHead>
-            <TableHead>Secretaria</TableHead>
+            <TableHead>Setor</TableHead>
             <TableHead>Valor</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-center">Ações</TableHead>

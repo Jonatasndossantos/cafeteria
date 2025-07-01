@@ -10,6 +10,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Processo;
+use App\Models\Setor;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -17,6 +19,15 @@ Route::get('/', function () {
         // 'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+    ]);
+});
+Route::get('/documentos', function () {
+    return Inertia::render('Processo/Documentos', [
+        'auth' => [
+            'user' => auth()->user(),
+        ],
+        'processos' => Processo::with('setor')->get(),
+        'setores' => Setor::all(),
     ]);
 });
 

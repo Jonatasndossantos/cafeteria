@@ -107,11 +107,11 @@ export const VisualizacaoTabela = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Processo/Documento</TableHead>
+            <TableHead>Solicitação</TableHead>
             <TableHead>Tipo</TableHead>
             <TableHead>Data</TableHead>
             <TableHead>Objeto</TableHead>
-            <TableHead>Secretaria</TableHead>
+            <TableHead>Setor</TableHead>
             <TableHead>Valor</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-center">Ações</TableHead>

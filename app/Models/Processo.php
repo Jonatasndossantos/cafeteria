@@ -24,7 +24,7 @@ class Processo extends Model
     ];
 
     protected $casts = [
-        'data' => 'date',
+        'data' => 'date:Y-m-d',
         'valor' => 'decimal:2',
         'tags' => 'array',
         'autenticidade' => 'array'

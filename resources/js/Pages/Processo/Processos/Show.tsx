@@ -16,7 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { ArrowLeft, FileText, Clock, User, Building, Calendar, DollarSign, Paperclip, Eye, X, Download, PenTool, Upload, File, Send, ChevronRight, CheckCircle, AlertCircle, Circle, RefreshCw, Play } from 'lucide-react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, Link } from '@inertiajs/react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { processosAdministrativos, secretarias, modalidades, fasesProcesso } from '@/Components/ambienteServidor/types/processosAdministrativos';
 import { ProcessoAdministrativo, DocumentoProcesso, AnexoProcesso, FiltrosProcesso } from '@/Components/ambienteServidor/types/painelProcessos';
@@ -81,6 +81,16 @@ interface Props {
 }
 
 const Show = ({ processo = [], arquivos = [], arquivosAtual = [] }: Props) => {
+  const queryClient = new QueryClient();
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ShowContent processo={processo} arquivos={arquivos} arquivosAtual={arquivosAtual} />
+    </QueryClientProvider>
+  );
+};
+
+const ShowContent = ({ processo = [], arquivos = [], arquivosAtual = [] }: Props) => {
   const { data: processosData } = useQuery<Processo[]>({
     queryKey: ['processo'],
     queryFn: () => {
