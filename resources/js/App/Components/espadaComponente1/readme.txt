@@ -1,1 +1,0 @@
-//aqui vai todos componentes da espada 1

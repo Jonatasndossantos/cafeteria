@@ -4,23 +4,25 @@ import IdentificacaoBloco from '@/Components/IdentificacaoBloco';
 import { Button } from '@/Components/ui/button';
 import { Header } from '@/Components/Header';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 
-const queryClient = new QueryClient();
+interface Setor {
+    id: number;
+    nome: string;
+    sigla: string;
+}
 
-export default function Processos() {
+export default function Processos(props: { setores: Setor[] }) {
     const handleBack = () => {
         router.visit('/documentos');
     };
 
     return (
-        <QueryClientProvider client={queryClient}>
             <div className="min-h-screen bg-gray-50">
                 <Header />
                 <main className="container px-4 py-8 mx-auto">
                     <div className="p-6 bg-white rounded-lg shadow">
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex justify-between items-center mb-6">
                             <Button
                                 variant="outline"
                                 onClick={handleBack}
@@ -31,11 +33,10 @@ export default function Processos() {
                             </Button>
                             <h1 className="text-2xl font-bold">Novo Processo</h1>
                         </div>
-                        <IdentificacaoBloco />
+                        <IdentificacaoBloco setores={props.setores}/>
                     </div>
                 </main>
-               
+
             </div>
-        </QueryClientProvider>
     );
 }
