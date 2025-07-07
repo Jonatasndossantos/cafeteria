@@ -23,6 +23,44 @@ export interface ProdutoStats {
     preco_max: number | null;
 }
 
+export interface OrderItem {
+    id: string;
+    produto_id: number;
+    produto: Produto;
+    quantidade: number;
+    preco_unitario: number;
+    subtotal: number;
+}
+
+export interface Order {
+    id: string;
+    user_id: string;
+    user_email: string;
+    user_name: string;
+    status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'refunded';
+    payment_status: 'pending' | 'paid' | 'failed' | 'refunded';
+    payment_method: 'stripe' | 'pix' | 'cash';
+    stripe_payment_intent_id?: string;
+    stripe_customer_id?: string;
+    total_amount: number;
+    currency: string;
+    items: OrderItem[];
+    created_at: string;
+    updated_at: string;
+    paid_at?: string;
+    cancelled_at?: string;
+    notes?: string;
+}
+
+export interface OrderStats {
+    total_orders: number;
+    total_revenue: number;
+    pending_orders: number;
+    completed_orders: number;
+    today_orders: number;
+    today_revenue: number;
+}
+
 export interface PaginatedResponse<T> {
     data: T[];
     current_page: number;
