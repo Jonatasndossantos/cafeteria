@@ -9,9 +9,7 @@ import {
 
 import { usePage, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { StandardCard } from '@/Components/ui/standard-card';
-import axios from 'axios';
 
 interface Setor {
   id: number;
@@ -53,17 +51,13 @@ interface PageProps {
   [key: string]: any;
 }
 
-export default function IdentificacaoBloco() {
-  const { props } = usePage<any>();
+export default function IdentificacaoBloco(props: { setores: Setor[] }) {
+    const { auth } = usePage<PageProps>();
   const currentYear = new Date().getFullYear();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Debug: Log authentication data
-  console.log('Auth props:', props.auth);
-  console.log('User data:', props.auth?.user);
+  const idSetor = auth?.user?.setor?.id;
 
-  const idSetor = props.auth?.user?.setor?.id;
-  
   const [formData, setFormData] = useState({
     numero_processo: `PA-${currentYear}/`,
     modalidade: '',
@@ -94,18 +88,12 @@ export default function IdentificacaoBloco() {
     }));
   }, [formData.unidadeIniciadora, currentYear, idSetor]);
 
-  const { data: setores = [] } = useQuery({
-    queryKey: ['setores'],
-    queryFn: async () => {
-      const response = await axios.get('/api/setores-public');
-      return response.data;
-    }
-  });
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Prepare the data for submission
     const submitData = {
       ...formData,
@@ -139,10 +127,10 @@ export default function IdentificacaoBloco() {
   // Debug: Log formData to console
   console.log('formData:', formData);
   console.log('tipos array:', tipos);
-  console.log('setores carregados:', setores);
+  console.log('setores carregados:', props.setores);
 
   return (
-    <StandardCard 
+    <StandardCard
       title="Identificação da necessidade"
       icon={Eye}
       className="mb-6"
@@ -159,7 +147,7 @@ export default function IdentificacaoBloco() {
             </div>
             <input
               type="text"
-              className="flex-1 px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+              className="flex-1 px-3 py-2 rounded-md border border-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-lumen-blue"
               placeholder="00000"
               value={formData.unidadeIniciadora}
               onChange={(e) => {
@@ -200,12 +188,12 @@ export default function IdentificacaoBloco() {
             Valor *
           </label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R$</span>
+            <span className="absolute left-3 top-1/2 text-gray-500 transform -translate-y-1/2">R$</span>
             <input
               type="number"
               step="0.01"
               min="0"
-              className="w-full pl-10 pr-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+              className="py-2 pr-3 pl-10 w-full rounded-md border border-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-lumen-blue"
               placeholder="0,00"
               value={formData.valor}
               onChange={(e) => {
@@ -223,7 +211,7 @@ export default function IdentificacaoBloco() {
           </label>
           <input
             type="date"
-            className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+            className="px-3 py-2 w-full rounded-md border border-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-lumen-blue"
             value={formData.data}
             onChange={(e) => setFormData(prev => ({ ...prev, data: e.target.value }))}
             required
@@ -268,7 +256,7 @@ export default function IdentificacaoBloco() {
               <SelectValue placeholder="Selecione o órgão/unidade" />
             </SelectTrigger>
             <SelectContent>
-              {setores?.map((option: Setor) => (
+              {props.setores?.map((option: Setor) => (
                 <SelectItem key={option.id} value={option.id.toString()}>
                   {option.nome} ({option.sigla})
                 </SelectItem>
@@ -284,16 +272,16 @@ export default function IdentificacaoBloco() {
           <div className="grid grid-cols-2 gap-2">
             <input
               type="text"
-              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md bg-gray-50"
+              className="px-3 py-2 w-full bg-gray-50 rounded-md border border-gray-300 transition-colors"
               placeholder="Nome"
-              value={props.auth?.user?.nome || ''}
+              value={auth?.user?.nome || ''}
               readOnly
             />
             <input
               type="text"
-              className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md bg-gray-50"
+              className="px-3 py-2 w-full bg-gray-50 rounded-md border border-gray-300 transition-colors"
               placeholder="Cargo"
-              value={props.auth?.user?.cargo || ''}
+              value={auth?.user?.cargo || ''}
               readOnly
             />
           </div>
@@ -306,7 +294,7 @@ export default function IdentificacaoBloco() {
         </label>
         <textarea
           id="descricao_necessidade"
-          className="w-full px-3 py-2 transition-colors border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lumen-blue"
+          className="px-3 py-2 w-full rounded-md border border-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-lumen-blue"
           rows={4}
           placeholder="Descreva detalhadamente a necessidade..."
           value={formData.objeto}
@@ -315,7 +303,7 @@ export default function IdentificacaoBloco() {
         />
       </div>
 
-  
+
 
       <div className="flex justify-end mt-6">
         <button
