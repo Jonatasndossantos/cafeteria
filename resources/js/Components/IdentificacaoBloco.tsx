@@ -33,14 +33,20 @@ interface User {
 
 interface PageProps {
   auth: {
-    nome: string;
-    cargo: string;
-    setor: {
+    user: {
       id: number;
       nome: string;
-      sigla: string;
+      cargo: string;
+      cpf: string;
+      matricula: string;
+      email: string;
+      celular?: string;
+      setor?: {
+        id: number;
+        nome: string;
+        sigla: string;
+      };
     };
-    [key: string]: any;
   };
   [key: string]: any;
 }

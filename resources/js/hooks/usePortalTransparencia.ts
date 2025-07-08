@@ -66,58 +66,8 @@ export const usePortalTransparencia = (processos: any[] = []) => {
   const documentosFiltrados = useMemo(() => {
     return documentos.filter(documento => {
       // Filtro por tipo de documento
-      if (filtros.tipoDocumento !== 'Todos' && documento.tipo !== filtros.tipoDocumento) {
+      if (filtros.tipo !== 'Todos' && documento.tipo !== filtros.tipo) {
         return false;
-      }
-
-      // Filtro por tipo de objeto (baseado no conteúdo do objeto)
-      if (filtros.tipo !== 'Todos') {
-        const objetoLower = (documento.objeto || '').toLowerCase();
-        const tipoFiltro = filtros.tipo.toLowerCase();
-
-        let corresponde = false;
-
-        switch (tipoFiltro) {
-          case 'obras':
-            corresponde = objetoLower.includes('obra') || objetoLower.includes('construção') || objetoLower.includes('reforma') || objetoLower.includes('pavimentação');
-            break;
-          case 'serviços comuns':
-            corresponde = objetoLower.includes('limpeza') || objetoLower.includes('conservação') || objetoLower.includes('transporte') || objetoLower.includes('segurança');
-            break;
-          case 'serviços especializados':
-            corresponde = objetoLower.includes('consultoria') || objetoLower.includes('engenharia') || objetoLower.includes('especializado') || objetoLower.includes('técnico');
-            break;
-          case 'serviços de engenharia':
-            corresponde = objetoLower.includes('engenharia') || objetoLower.includes('projeto') || objetoLower.includes('fiscalização');
-            break;
-          case 'tecnologia da informação (tic)':
-            corresponde = objetoLower.includes('informática') || objetoLower.includes('computador') || objetoLower.includes('sistema') || objetoLower.includes('tic') || objetoLower.includes('tecnologia');
-            break;
-          case 'locação de bens':
-            corresponde = objetoLower.includes('locação') || objetoLower.includes('aluguel') || objetoLower.includes('arrendamento');
-            break;
-          case 'aquisição de bens permanentes':
-            corresponde = objetoLower.includes('equipamento') || objetoLower.includes('máquina') || objetoLower.includes('veículo') || objetoLower.includes('bem permanente');
-            break;
-          case 'aquisição de materiais de consumo':
-            corresponde = objetoLower.includes('material') || objetoLower.includes('consumo') || objetoLower.includes('expediente') || objetoLower.includes('medicamento');
-            break;
-          case 'obras e serviços de engenharia':
-            corresponde = objetoLower.includes('obra') && (objetoLower.includes('engenharia') || objetoLower.includes('serviço'));
-            break;
-          case 'parceria com osc/termo de colaboração/fomento':
-            corresponde = objetoLower.includes('parceria') || objetoLower.includes('convênio') || objetoLower.includes('colaboração') || objetoLower.includes('fomento');
-            break;
-          case 'consultoria técnica/estudo especializado':
-            corresponde = objetoLower.includes('consultoria') || objetoLower.includes('estudo') || objetoLower.includes('especializado');
-            break;
-          default:
-            corresponde = true;
-        }
-
-        if (!corresponde) {
-          return false;
-        }
       }
 
       // Filtro por modalidade
@@ -223,22 +173,7 @@ export const usePortalTransparencia = (processos: any[] = []) => {
           ...(documento.tags || [])
         ].map(campo => String(campo).toLowerCase()).filter(campo => campo.length > 0);
 
-        console.log('=== DEBUG BUSCA ===');
-        console.log('Busca:', busca);
-        console.log('Campos de busca:', camposBusca);
-        console.log('Objeto do documento:', documento.objeto);
-        console.log('Objeto lowercase:', (documento.objeto || '').toLowerCase());
-        console.log('Busca incluída no objeto:', (documento.objeto || '').toLowerCase().includes(busca));
-
-        const encontrou = camposBusca.some(campo => {
-          const resultado = campo.includes(busca);
-          if (campo === (documento.objeto || '').toLowerCase()) {
-            console.log('Verificando objeto:', campo, 'contém', busca, '=', resultado);
-          }
-          return resultado;
-        });
-        console.log('Encontrou:', encontrou);
-        console.log('=== FIM DEBUG ===');
+        const encontrou = camposBusca.some(campo => campo.includes(busca));
 
         if (!encontrou) {
           return false;

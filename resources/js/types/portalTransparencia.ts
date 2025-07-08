@@ -8,7 +8,7 @@ export type TipoDocumento =
   | 'Serviços'
   | 'Materiais Administrativos';
 
-export type StatusDocumento = 'Em andamento' | 'Concluído' | 'Cancelado' | 'Suspenso';
+export type StatusDocumento = 'em andamento' | 'concluido' | 'cancelado' | 'suspenso';
 
 export type OrigemDocumento = 'Criado na LUMEN' | 'Importado' | 'Sistema Externo';
 

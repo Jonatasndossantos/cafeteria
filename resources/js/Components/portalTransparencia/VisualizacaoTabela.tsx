@@ -3,20 +3,25 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/Components/ui/button';
 import { Badge } from '@/Components/ui/badge';
 import { DocumentoPublico } from '@/types/portalTransparencia';
-import { Download, Share, CheckCircle, Lock, AlertTriangle, Loader2 } from 'lucide-react';
+import { Download, Share, CheckCircle, Lock, AlertTriangle, Loader2, Edit, Trash2 } from 'lucide-react';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
 
 interface VisualizacaoTabelaProps {
   documentos: DocumentoPublico[];
   onDownload?: (documento: DocumentoPublico) => Promise<void>;
+  onEdit?: (documento: DocumentoPublico) => void;
+  onDelete?: (documento: DocumentoPublico) => Promise<void>;
 }
 
 export const VisualizacaoTabela = ({ 
   documentos,
-  onDownload
+  onDownload,
+  onEdit,
+  onDelete
 }: VisualizacaoTabelaProps) => {
   const [downloadingIds, setDownloadingIds] = useState<Set<string>>(new Set());
+  const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
   
   //console.log('Documentos recebidos na tabela:', documentos); // Debug log
   
@@ -63,6 +68,43 @@ export const VisualizacaoTabela = ({
     router.visit(`/processos/${documento.id}`);
   };
 
+  
+  const handleDelete = async (documento: DocumentoPublico, e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita que o clique propague para a linha
+    
+    if (confirm(`Tem certeza que deseja excluir o processo "${documento.numeroProcesso}"?`)) {
+      // Adicionar ao estado de loading
+      setDeletingIds(prev => new Set(prev).add(documento.id));
+      
+      try {
+        if (onDelete) {
+          await onDelete(documento);
+        } else {
+          // Usar POST em vez de DELETE para evitar problemas com CSRF
+          const response = await axios.post(`/api/processos/${documento.id}/delete`);
+          
+          if (response.data.success) {
+            // Recarregar a página para atualizar a lista
+            window.location.reload();
+          } else {
+            throw new Error(response.data.error || 'Erro desconhecido');
+          }
+        }
+      } catch (error: any) {
+        console.error('Erro ao excluir processo:', error);
+        const errorMessage = error.response?.data?.error || error.message || 'Erro ao excluir o processo. Tente novamente.';
+        alert(errorMessage);
+      } finally {
+        // Remover do estado de loading
+        setDeletingIds(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(documento.id);
+          return newSet;
+        });
+      }
+    }
+  };
+
   const handleDownload = async (documento: DocumentoPublico, e: React.MouseEvent) => {
     e.stopPropagation(); // Evita que o clique propague para a linha
     
@@ -83,15 +125,28 @@ export const VisualizacaoTabela = ({
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', `documento-${documento.numeroProcesso}.pdf`);
+        link.setAttribute('download', `documento-${documento.numeroProcesso}.html`);
         document.body.appendChild(link);
         link.click();
         link.remove();
         window.URL.revokeObjectURL(url);
       }
-    } catch (error) {
-      console.error('Erro ao baixar PDF:', error);
-      alert('Erro ao baixar o PDF. Tente novamente.');
+    } catch (error: any) {
+      console.error('Erro ao baixar documento:', error);
+      
+      let errorMessage = 'Erro ao baixar o documento. Tente novamente.';
+      
+      if (error.response?.status === 404) {
+        errorMessage = 'Documento não encontrado.';
+      } else if (error.response?.status === 401) {
+        errorMessage = 'Você não está autorizado para baixar este documento.';
+      } else if (error.response?.status === 500) {
+        errorMessage = 'Erro interno do servidor ao gerar o documento.';
+      } else if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      
+      alert(errorMessage);
     } finally {
       // Remover do estado de loading
       setDownloadingIds(prev => {
@@ -109,6 +164,7 @@ export const VisualizacaoTabela = ({
           <TableRow>
             <TableHead>Solicitação</TableHead>
             <TableHead>Tipo</TableHead>
+            <TableHead>Modalidade</TableHead>
             <TableHead>Data</TableHead>
             <TableHead>Objeto</TableHead>
             <TableHead>Setor</TableHead>
@@ -134,6 +190,12 @@ export const VisualizacaoTabela = ({
               <TableCell>
                 <Badge variant="outline" className="text-xs">
                   {documento.tipo}
+                </Badge>
+              </TableCell>
+              
+              <TableCell>
+                <Badge variant="secondary" className="text-xs">
+                  {documento.modalidade || 'Não informada'}
                 </Badge>
               </TableCell>
               
@@ -166,14 +228,32 @@ export const VisualizacaoTabela = ({
                   <Button
                     size="sm"
                     variant="ghost"
-                    title="Baixar PDF"
+                    title="Baixar Documento"
                     onClick={(e) => handleDownload(documento, e)}
                     disabled={downloadingIds.has(documento.id)}
+                    className="text-blue-600 hover:text-blue-800 hover:bg-blue-50"
                   >
                     {downloadingIds.has(documento.id) ? (
                       <Loader2 className="w-3 h-3 animate-spin" />
                     ) : (
                       <Download className="w-3 h-3" />
+                    )}
+                  </Button>
+                  
+                 
+                  
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    title="Excluir Processo"
+                    onClick={(e) => handleDelete(documento, e)}
+                    disabled={deletingIds.has(documento.id)}
+                    className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                  >
+                    {deletingIds.has(documento.id) ? (
+                      <Loader2 className="w-3 h-3 animate-spin" />
+                    ) : (
+                      <Trash2 className="w-3 h-3" />
                     )}
                   </Button>
                 </div>

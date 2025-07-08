@@ -151,7 +151,38 @@ class ProcessoController extends Controller
         ]);
     }
 
-
-
-
+    public function destroy($id)
+    {
+        try {
+            $processo = Processo::findOrFail($id);
+            
+            // Verificar se o usuário tem permissão para deletar (opcional)
+            // if ($processo->usuario_id !== Auth::id()) {
+            //     return response()->json(['error' => 'Não autorizado'], 403);
+            // }
+            
+            // Deletar arquivos relacionados primeiro
+            Arquivo::where('processo_id', $id)->delete();
+            
+            // Deletar o processo
+            $processo->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Processo excluído com sucesso'
+            ]);
+            
+        } catch (\Exception $e) {
+            \Log::error('ProcessoController@destroy - Erro ao excluir processo', [
+                'id' => $id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'error' => 'Erro ao excluir processo: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }

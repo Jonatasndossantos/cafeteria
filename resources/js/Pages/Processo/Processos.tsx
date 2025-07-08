@@ -17,10 +17,14 @@ export default function Processos(props: { setores: Setor[] }) {
         router.visit('/documentos');
     };
 
+    const handleBackToDemandas = () => {
+        router.visit('/dashboard');
+    };
+
     return (
             <div className="min-h-screen bg-gray-50">
                 <Header />
-                <main className="container px-4 py-8 mx-auto">
+                <main className="container px-4 py-8 mx-auto mt-20">
                     <div className="p-6 bg-white rounded-lg shadow">
                         <div className="flex justify-between items-center mb-6">
                             <Button

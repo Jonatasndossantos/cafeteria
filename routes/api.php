@@ -37,6 +37,15 @@ Route::get('/setores-public', function () {
     return response()->json(Setor::all());
 });
 
+// Rota de teste para verificar autenticação
+Route::middleware('auth:sanctum')->get('/test-auth', function (Request $request) {
+    return response()->json([
+        'authenticated' => true,
+        'user' => $request->user(),
+        'message' => 'Usuário autenticado com sucesso'
+    ]);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
