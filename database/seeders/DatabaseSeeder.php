@@ -26,35 +26,45 @@ class DatabaseSeeder extends Seeder
             ['nome' => 'Atendimento', 'sigla' => 'ATE'],
         ];
 
-        foreach ($setores as $setor) {
-            $setorCriado = Setor::create($setor);
+        foreach ($setores as $index => $setor) {
+            $setorCriado = Setor::firstOrCreate(
+                ['sigla' => $setor['sigla']],
+                ['nome' => $setor['nome']]
+            );
 
             // Create one user for each sector
-            Usuario::create([
-                'nome' => 'Usuário ' . $setor['sigla'],
-                'cpf' => '000.000.000-' . rand(10, 99),
-                'dataNasc' => '1990-01-01',
-                'matricula' => 'MAT' . $setor['sigla'] . rand(1000, 9999),
-                'cargo' => 'Analista',
-                'email' => strtolower($setor['sigla']) . '@example.com',
-                'celular' => '(00) 00000-0000',
-                'password' => Hash::make('senha123'),
-                'setor_id' => $setorCriado->id,
-                'perfilAcesso' => 'usuario'
-            ]);
+            Usuario::firstOrCreate(
+                ['email' => strtolower($setor['sigla']) . '@example.com'],
+                [
+                    'nome' => 'Usuário ' . $setor['sigla'],
+                    'cpf' => '000.000.000-' . str_pad($index + 10, 2, '0', STR_PAD_LEFT),
+                    'dataNasc' => '1990-01-01',
+                    'matricula' => 'MAT' . $setor['sigla'] . rand(1000, 9999),
+                    'cargo' => 'Analista',
+                    'celular' => '(00) 00000-0000',
+                    'password' => Hash::make('senha123'),
+                    'setor_id' => $setorCriado->id,
+                    'perfilAcesso' => 'usuario'
+                ]
+            );
         }
-        Usuario::create([
-            'nome' => 'Administrador',
-            'cpf' => '100.000.000-00',
-            'dataNasc' => '1990-01-01',
-            'matricula' => 'ADM001',
-            'cargo' => 'Administrador',
-            'email' => 'admin@admin.com',
-            'celular' => '(00) 00000-0000',
-            'password' => Hash::make('admin123'),
-            'perfilAcesso' => 'admin',
-            'setor_id' => 3
-        ]);
+        
+        $setorAdmin = Setor::where('sigla', 'ADM')->first();
+        
+        Usuario::firstOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'nome' => 'Administrador',
+                'cpf' => '100.000.000-00',
+                'dataNasc' => '1990-01-01',
+                'matricula' => 'ADM001',
+                'cargo' => 'Administrador',
+                'celular' => '(00) 00000-0000',
+                'password' => Hash::make('admin123'),
+                'perfilAcesso' => 'admin',
+                'setor_id' => $setorAdmin ? $setorAdmin->id : 3
+            ]
+        );
 
         // Executar seeder de processos e arquivos
         // $this->call(ProcessosArquivosSeeder::class);
